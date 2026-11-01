@@ -1,0 +1,8 @@
+{
+  "name": "φ To Media - منظومة الإعلاميين المصريين",
+  "description": "المنظومة الإعلامية المتكاملة لطلاب وخريجي الإعلام، الخبراء، والمؤسسات. بطاقات Tima، بورتفوليو احترافي، ومعمل التحديات.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "permissions": []
+}

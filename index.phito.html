@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>φ To Media | الإعلام مش هواية. الإعلام هوية</title>
+  <meta name="description" content="منظومة φ To Media المتكاملة لطلاب وخريجي كليات الإعلام، الخبراء والمنتورز، والمؤسسات الإعلامية في مصر. بطاقات Tima، بورتفوليو احترافي، ومعمل التحديات.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            phi: {
+              purple: '#7C3AED',
+              pink: '#EC4899',
+              darkBlue: '#1E1B4B',
+              lightBg: '#F5F3FF',
+              lightPurple: '#EDE9FE'
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            inter: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Cairo & Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    #tima-card, #tima-card *,
+    #tima-card-outer, #tima-card-outer * {
+      font-family: 'Cairo', sans-serif !important;
+      direction: rtl !important;
+      text-rendering: optimizeLegibility !important;
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: 0 !important;
+      word-spacing: normal !important;
+    }
+    .card-name {
+      unicode-bidi: plaintext;
+      font-feature-settings: "liga" 1, "calt" 1;
+    }
+  </style>
+
+  <!-- html-to-image CDN (Crisp Arabic ligature rendering for RTL card capture) -->
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- html2canvas CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Early Safe window.phiApp proxy to guarantee phiApp is NEVER undefined at any click time -->
+  <script>
+    window._phiAppQueue = [];
+    window.phiApp = new Proxy({}, {
+      get: function(target, prop) {
+        if (prop in target) return target[prop];
+        return function(...args) {
+          if (window._phiAppReal && typeof window._phiAppReal[prop] === 'function') {
+            return window._phiAppReal[prop](...args);
+          }
+          window._phiAppQueue.push([prop, args]);
+        };
+      }
+    });
+  </script>
+
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-[#F5F3FF] text-[#1E1B4B] font-cairo flex flex-col selection:bg-[#EC4899] selection:text-white pb-20 md:pb-0" style="min-height: calc(100vh + 100px); padding-bottom: 150px !important;">
+
+  <!-- Top Banner: Stand with Palestine -->
+  <div style="text-align:center; background:#000; color:white; padding:8px; font-weight:800; letter-spacing:1px; z-index:50; position:relative;">
+    🇵🇸 STAND WITH PALESTINE 🇵🇸
+  </div>
+
+  <!-- ========================================================
+       TOP NAVIGATION BAR (Dark Blue #1E1B4B)
+       ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1E1B4B] text-white shadow-lg border-b border-purple-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo & Slogan -->
+      <div onclick="window.phiApp.navigateView('landing')" class="flex items-center gap-3 cursor-pointer group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#7C3AED] to-[#EC4899] flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-pink-500/25 group-hover:scale-105 transition-transform duration-300">
+          φ
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span class="font-black text-xl text-white tracking-tight">φ</span>
+            <span class="font-black text-xl text-[#DDD6FE] tracking-tight">To Media</span>
+            <span class="text-[10px] font-bold text-white bg-gradient-to-r from-[#7C3AED] to-[#EC4899] px-2 py-0.5 rounded-full shadow-sm">Ecosystem</span>
+          </div>
+          <span class="text-[11px] text-purple-200 font-medium">"الإعلام مش هواية. الإعلام هوية"</span>
+        </div>
+      </div>
+
+      <!-- Quick Switch Roles & Nav -->
+      <nav class="hidden lg:flex items-center gap-2 bg-[#17143A] p-1.5 rounded-2xl border border-purple-900/60 text-xs">
+        <button onclick="window.phiApp.navigateView('landing')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all">
+          الرئيسية
+        </button>
+        <button onclick="window.phiApp.navigateView('student-app')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all flex items-center gap-1.5">
+          <span>🎓 بوابة الطلاب</span>
+        </button>
+        <button onclick="window.phiApp.navigateView('mentor-app')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all flex items-center gap-1.5">
+          <span>🧠 بوابة المنتورز</span>
+        </button>
+        <button onclick="window.phiApp.navigateView('company-app')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all flex items-center gap-1.5">
+          <span>🏢 بوابة المؤسسات</span>
+        </button>
+        <button onclick="window.phiApp.navigateView('privacy')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all flex items-center gap-1.5">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-pink-400"></i>
+          <span>الأمان والخصوصية</span>
+        </button>
+        <button onclick="window.phiApp.navigateView('student-app'); window.phiApp.setStudentTab('about')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all flex items-center gap-1.5">
+          <i data-lucide="help-circle" class="w-3.5 h-3.5 text-purple-300"></i>
+          <span>حول φ To Media</span>
+        </button>
+        <button onclick="window.phiApp.checkAdminAccess()" class="px-3 py-1.5 rounded-xl font-bold text-[#EC4899] hover:bg-pink-950/40 border border-pink-900/40 transition-all flex items-center gap-1">
+          <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+          <span>لوحة الإدارة</span>
+        </button>
+      </nav>
+
+      <!-- Auth Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Logged Out Button -->
+        <div id="nav-user-logged-out" class="flex items-center gap-2">
+          <button onclick="window.phiApp.startOnboarding()" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#7C3AED] to-[#EC4899] hover:opacity-95 text-white font-black text-xs sm:text-sm shadow-lg shadow-pink-500/20 transition-all flex items-center gap-2 cursor-pointer">
+            <span>ابدأ بناء عالمك الإعلامي</span>
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Logged In Badge -->
+        <div id="nav-user-logged-in" class="hidden items-center gap-2.5">
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-[#17143A] border border-purple-800 text-xs text-white">
+            <div class="w-7 h-7 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-bold flex items-center justify-center text-xs">
+              φ
+            </div>
+            <div class="flex flex-col text-right">
+              <span id="nav-username" class="font-bold text-xs leading-none">مريم حسام</span>
+              <span id="nav-user-role-badge" class="text-[10px] text-pink-300 font-semibold mt-0.5">طالب إعلام</span>
+            </div>
+          </div>
+          <span id="nav-user-level-badge" class="hidden sm:inline-flex items-center px-3 py-1 rounded-xl text-[11px] font-black bg-pink-500/20 text-[#EC4899] border border-pink-400/40 font-mono">
+            المستوى ∞ - 12
+          </span>
+          <button onclick="window.phiApp.logoutUser()" title="تسجيل الخروج" class="p-2 rounded-xl bg-[#17143A] hover:bg-rose-900/40 text-purple-300 hover:text-rose-300 transition-all">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Global Frozen Account Warning Banner -->
+  <div id="banner-frozen-account" class="hidden bg-rose-600 text-white px-4 py-3 text-center text-xs sm:text-sm font-black shadow-lg flex items-center justify-center gap-2 sticky top-0 z-50">
+    <i data-lucide="alert-octagon" class="w-5 h-5 animate-pulse"></i>
+    <span>⚠️ تم تجميد الحساب لحين المراجعة - تم رصد عدة بلاغات ضد هذا الحساب لمخالفة سياسات الأمان ومنع النصب.</span>
+  </div>
+
+  <!-- ========================================================
+       MAIN APPLICATION VIEW CONTAINER
+       ======================================================== -->
+  <main class="flex-1">
+
+    <!-- ======================================================
+         1. LANDING PAGE
+         ====================================================== -->
+    <section id="view-landing" class="block">
+      
+      <!-- Hero Section (Dark Blue #1E1B4B with Purple/Pink Blobs) -->
+      <div class="relative overflow-hidden bg-[#1E1B4B] py-20 lg:py-28 text-white">
+        <div class="absolute -top-24 right-1/4 w-96 h-96 bg-[#7C3AED]/35 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 left-1/4 w-96 h-96 bg-[#EC4899]/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 left-10 w-72 h-72 bg-[#7C3AED]/20 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          
+          <!-- Logo φ in white, To Media in light purple -->
+          <div class="flex flex-col items-center justify-center mb-6">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white/10 border-2 border-white/20 backdrop-blur-md flex items-center justify-center text-white font-black text-6xl sm:text-7xl shadow-2xl mb-4 hover:rotate-3 transition-transform duration-300">
+              φ
+            </div>
+            <span class="text-xs uppercase tracking-widest text-[#DDD6FE] font-bold">To Media • منظومة إعلام مصر الشاملة</span>
+          </div>
+
+          <!-- Bold Slogan: "الإعلام مش هواية. الإعلام هوية" -->
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight mb-6">
+            الإعلام مش هواية. <br>
+            <span class="bg-gradient-to-r from-[#DDD6FE] via-[#EC4899] to-[#DDD6FE] bg-clip-text text-transparent">الإعلام هوية</span>
+          </h1>
+
+          <p class="max-w-2xl mx-auto text-base sm:text-xl text-purple-200 leading-relaxed mb-10 font-normal">
+            المنظومة الإعلامية الأولى في مصر التي تجمع بين الطلاب والمنتورز والمؤسسات في بيئة احترافية واحدة مع بطاقات مهارات Tima المقيمة بالذكاء الاصطناعي.
+          </p>
+
+          <!-- CTA Button: "ابدأ بناء عالمك الإعلامي" -> Gradient Purple to Pink, White Text, Rounded-Full, Shadow -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-16">
+            <button onclick="window.phiApp.startOnboarding()" class="w-full sm:w-auto px-9 py-4 rounded-full bg-gradient-to-r from-[#7C3AED] to-[#EC4899] hover:opacity-95 text-white font-black text-lg shadow-xl shadow-pink-500/30 hover:scale-105 transition-all flex items-center justify-center gap-3 cursor-pointer">
+              <span>ابدأ بناء عالمك الإعلامي</span>
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <button onclick="window.phiApp.navigateView('role-select')" class="w-full sm:w-auto px-7 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-base border border-purple-400/30 transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <i data-lucide="users" class="w-5 h-5 text-[#EC4899]"></i>
+              <span>اختر هويتك الإعلامية</span>
+            </button>
+          </div>
+
+          <!-- 3 Features White Cards with Purple Icons -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-right">
+            <div class="p-6 rounded-3xl bg-white text-[#1E1B4B] shadow-xl border border-purple-100 hover:-translate-y-1 transition-all group">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <i data-lucide="award" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-black text-[#1E1B4B] mb-2">بطاقات Tima المهارية</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                تقييم ذكي 0-99 على 6 مهارات محورية: تصوير، مونتاج، كتابة، تقديم، علاقات عامة، وديجيتال ميديا.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-white text-[#1E1B4B] shadow-xl border border-purple-100 hover:-translate-y-1 transition-all group">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <i data-lucide="calendar" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-black text-[#1E1B4B] mb-2">نظام الخبراء المتخصصين</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                حجز جلسات توجيه مباشرة 1-on-1 مع كبار مونتيري الجزيرة وصحفيي المصري اليوم مع غرف Meet فورية.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-white text-[#1E1B4B] shadow-xl border border-purple-100 hover:-translate-y-1 transition-all group">
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <i data-lucide="briefcase" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-black text-[#1E1B4B] mb-2">Talent Pool للشركات</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                مساحة مخصصة لشركات الإنتاج والصحف لاكتشاف أصحاب الكفاءات العالية بالفلترة الدقيقة ونشر فرص التدريب.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         2. ROLE SELECTION SCREEN (انت مين في عالم الإعلام؟)
+         ====================================================== -->
+    <section id="view-role-select" class="hidden py-14 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold text-white bg-gradient-to-r from-[#7C3AED] to-[#EC4899] px-4 py-1.5 rounded-full shadow-sm">
+          بوابة الانضمام للمنظومة
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black text-[#1E1B4B] mt-4 mb-2">
+          انت مين في عالم الإعلام؟
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600">
+          اختر هويتك لتخصيص لوحة التحكم والخدمات والأدوات المناسبة لك في φ To Media.
+        </p>
+      </div>
+
+      <!-- 3 Big Role Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1: طالب / خريج -->
+        <div onclick="window.phiApp.openRoleSignup('student')" class="bg-white rounded-3xl p-8 border-2 border-purple-100 hover:border-[#7C3AED] shadow-xl hover:-translate-y-2 transition-all cursor-pointer group flex flex-col justify-between text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 left-0 h-2 bg-gradient-to-r from-[#7C3AED] to-[#EC4899]"></div>
+          <div>
+            <div class="w-20 h-20 rounded-3xl bg-purple-50 text-[#7C3AED] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-inner">
+              <span class="text-4xl">🎓</span>
+            </div>
+            <h3 class="text-2xl font-black text-[#1E1B4B] group-hover:text-[#7C3AED] transition-colors mb-2">طالب / خريج</h3>
+            <div class="text-xs font-bold text-[#EC4899] bg-pink-50 py-1 px-3 rounded-full inline-block mb-4">
+              "عايز تبني CV وبورتفوليو وبطاقة Tima"
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              اصنع سيرة ذاتية بمعايير ATS، ونظم مشاريعك، واحصل على تقييم 0-99 لمهاراتك، وشارك في معمل التحديات وحجز جلسات الخبراء.
+            </p>
+          </div>
+          <button class="w-full mt-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-lg shadow-pink-500/25 flex items-center justify-center gap-2">
+            <span>دخول كطالب إعلام</span>
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Card 2: خبير / منتور -->
+        <div onclick="window.phiApp.openRoleSignup('mentor')" class="bg-white rounded-3xl p-8 border-2 border-purple-100 hover:border-[#EC4899] shadow-xl hover:-translate-y-2 transition-all cursor-pointer group flex flex-col justify-between text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 left-0 h-2 bg-gradient-to-r from-[#EC4899] to-[#7C3AED]"></div>
+          <div>
+            <div class="w-20 h-20 rounded-3xl bg-pink-50 text-[#EC4899] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-inner">
+              <span class="text-4xl">🧠</span>
+            </div>
+            <h3 class="text-2xl font-black text-[#1E1B4B] group-hover:text-[#EC4899] transition-colors mb-2">خبير / منتور</h3>
+            <div class="text-xs font-bold text-[#7C3AED] bg-purple-50 py-1 px-3 rounded-full inline-block mb-4">
+              "عايز تساعد الجيل الجديد"
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              قدّم خبرتك العملية في المونتاج أو الصحافة أو التصوير أو الإذاعة، واستقبل طلبات الحجز الفردية وتابع أرباحك وتقييماتك.
+            </p>
+          </div>
+          <button class="w-full mt-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-lg shadow-pink-500/25 flex items-center justify-center gap-2">
+            <span>دخول كخبير / منتور</span>
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Card 3: شركة / صحيفة / قناة -->
+        <div onclick="window.phiApp.openRoleSignup('company')" class="bg-white rounded-3xl p-8 border-2 border-purple-100 hover:border-[#7C3AED] shadow-xl hover:-translate-y-2 transition-all cursor-pointer group flex flex-col justify-between text-center relative overflow-hidden">
+          <div class="absolute top-0 right-0 left-0 h-2 bg-gradient-to-r from-[#7C3AED] to-[#EC4899]"></div>
+          <div>
+            <div class="w-20 h-20 rounded-3xl bg-purple-50 text-[#7C3AED] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-inner">
+              <span class="text-4xl">🏢</span>
+            </div>
+            <h3 class="text-2xl font-black text-[#1E1B4B] group-hover:text-[#7C3AED] transition-colors mb-2">شركة / صحيفة / قناة</h3>
+            <div class="text-xs font-bold text-[#EC4899] bg-pink-50 py-1 px-3 rounded-full inline-block mb-4">
+              "عايزة تلاقي مواهب إعلامية"
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              تصفح الـ Talent Pool لطلاب مصر بالفلترة حسب مهارات بطاقة Tima، وانشر فرص التدريب والتوظيف واستقبل المتقدمين.
+            </p>
+          </div>
+          <button class="w-full mt-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-lg shadow-pink-500/25 flex items-center justify-center gap-2">
+            <span>دخول كمؤسسة إعلامية</span>
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         3. STUDENT DASHBOARD (4 TABS)
+         ====================================================== -->
+    <section id="view-student-app" class="hidden py-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Student Sub-Nav (Desktop Tabs) -->
+      <div class="flex items-center justify-between pb-6 mb-6 border-b border-purple-200">
+        <div>
+          <span class="text-xs font-bold text-white bg-gradient-to-r from-[#7C3AED] to-[#EC4899] px-3.5 py-1 rounded-full shadow-sm">
+            بوابة الطلاب والخريجين
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-[#1E1B4B] mt-2">لوحة الطالب الإعلامي</h2>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-1.5 bg-white p-1.5 rounded-2xl border border-purple-200 shadow-sm">
+          <button onclick="window.phiApp.setStudentTab('builder')" id="student-top-nav-builder" class="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white shadow-md">
+            بنائي (CV وبورتفوليو)
+          </button>
+          <button onclick="window.phiApp.setStudentTab('tima')" id="student-top-nav-tima" class="px-4 py-2 rounded-xl text-xs font-semibold text-purple-700 hover:text-purple-900 hover:bg-purple-50">
+            بطاقات Tima ⭐
+          </button>
+          <button onclick="window.phiApp.setStudentTab('lab')" id="student-top-nav-lab" class="px-4 py-2 rounded-xl text-xs font-semibold text-purple-700 hover:text-purple-900 hover:bg-purple-50">
+            المعمل (The Lab)
+          </button>
+          <button onclick="window.phiApp.setStudentTab('mentors')" id="student-top-nav-mentors" class="px-4 py-2 rounded-xl text-xs font-semibold text-purple-700 hover:text-purple-900 hover:bg-purple-50">
+            المنتورز المتخصصون
+          </button>
+          <button onclick="window.phiApp.setStudentTab('about')" id="student-top-nav-about" class="px-4 py-2 rounded-xl text-xs font-semibold text-purple-700 hover:text-purple-900 hover:bg-purple-50">
+            حول φ To Media
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 1: بنائي (CV Builder + Portfolio Builder) -->
+      <div id="student-pane-builder" class="block space-y-8">
+        
+        <!-- Sub-tabs Switcher -->
+        <div class="flex items-center justify-center max-w-md mx-auto bg-white p-1.5 rounded-2xl border border-purple-100 shadow-sm gap-1">
+          <button onclick="window.phiApp.setBuilderSubTab('cv')" id="tab-btn-cv" class="flex-1 py-3 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white shadow-md transition-all text-center">
+            صانع الـ CV الذكي
+          </button>
+          <button onclick="window.phiApp.setBuilderSubTab('portfolio')" id="tab-btn-portfolio" class="flex-1 py-3 rounded-2xl text-xs sm:text-sm font-bold text-[#7C3AED] hover:bg-purple-50 transition-all text-center">
+            صانع البورتفوليو
+          </button>
+        </div>
+
+        <!-- CV Builder Content (Full 8 Steps Professional ATS Media CV) -->
+        <div id="builder-pane-cv" class="block space-y-6">
+          
+          <!-- Mode switcher: Edit multi-step vs Live Print Preview -->
+          <div class="bg-white rounded-3xl p-4 sm:p-5 border border-purple-100 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+              <span class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#7C3AED] to-[#EC4899] text-white flex items-center justify-center font-black shadow-md">
+                φ
+              </span>
+              <div>
+                <h3 class="text-base font-black text-[#1E1B4B]">صانع السيرة الذاتية الإعلامية الاحترافية (ATS Media CV)</h3>
+                <p class="text-xs text-slate-500">8 خطوات متكاملة، حفظ تلقائي، دعم الذكاء الاصطناعي، وتحديث فوري لبطاقة Tima.</p>
+              </div>
+            </div>
+
+            <!-- Action buttons: Edit/Preview tabs + Save + PDF + Share -->
+            <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
+              <div class="flex items-center bg-purple-50 p-1 rounded-2xl border border-purple-200">
+                <button onclick="window.phiApp.setCVTab('edit')" id="cv-mode-btn-edit" class="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white shadow-md transition-all cursor-pointer">
+                  تعديل الخطوات
+                </button>
+                <button onclick="window.phiApp.setCVTab('preview')" id="cv-mode-btn-prev" class="px-4 py-2 rounded-xl text-xs font-bold text-[#7C3AED] hover:bg-purple-100 transition-all cursor-pointer">
+                  معاينة الـ CV
+                </button>
+              </div>
+              <button onclick="window.phiApp.saveCV()" class="px-3.5 py-2 rounded-xl bg-purple-100 text-[#7C3AED] hover:bg-purple-200 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="save" class="w-3.5 h-3.5"></i>
+                <span>حفظ في ملفي</span>
+              </button>
+              <button onclick="window.phiApp.downloadCVPdf()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white text-xs font-black shadow-md hover:opacity-95 transition-all flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>حمل PDF 📄</span>
+              </button>
+              <button onclick="window.phiApp.shareCVLink()" class="px-3.5 py-2 rounded-xl bg-white border border-purple-200 text-[#7C3AED] hover:bg-purple-50 text-xs font-bold shadow-sm flex items-center gap-1.5 cursor-pointer">
+                <i data-lucide="share-2" class="w-3.5 h-3.5 text-[#EC4899]"></i>
+                <span>شارك لينك CV</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step Indicators 1 to 8 -->
+          <div class="overflow-x-auto pb-1">
+            <div id="cv-steps-indicator" class="flex items-center gap-2 min-w-max">
+              <!-- Populated dynamically via JS -->
+            </div>
+          </div>
+
+          <!-- Tab Content A: Edit Mode -->
+          <div id="cv-tab-content-edit" class="bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm space-y-6">
+            <div id="cv-step-form-body">
+              <!-- Step content injected dynamically via JS -->
+            </div>
+
+            <!-- Form Bottom Nav Buttons -->
+            <div class="pt-6 border-t border-purple-100 flex items-center justify-between gap-4">
+              <button onclick="window.phiApp.prevCVStep()" id="btn-cv-prev-step" class="px-5 py-2.5 rounded-2xl bg-purple-50 text-[#7C3AED] hover:bg-purple-100 font-bold text-xs flex items-center gap-2 transition-all cursor-pointer">
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <span>الخطوة السابقة</span>
+              </button>
+              <div class="flex items-center gap-2">
+                <button onclick="window.phiApp.saveCV()" class="px-4 py-2.5 rounded-2xl bg-purple-100 text-[#7C3AED] font-bold text-xs hover:bg-purple-200 transition-all cursor-pointer">
+                  حفظ المسودة
+                </button>
+                <button onclick="window.phiApp.nextCVStep()" id="btn-cv-next-step" class="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-xs shadow-md shadow-pink-500/20 hover:opacity-95 flex items-center gap-2 transition-all cursor-pointer">
+                  <span>الخطوة التالية</span>
+                  <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content B: Live Preview Mode -->
+          <div id="cv-tab-content-preview" class="hidden space-y-4">
+            <div class="flex items-center justify-between bg-purple-50 p-4 rounded-2xl border border-purple-200 text-xs">
+              <span class="font-bold text-[#1E1B4B]">معاينة السيرة الذاتية المهنية الجاهزة للطباعة والـ ATS</span>
+              <div class="flex items-center gap-2">
+                <button onclick="window.phiApp.downloadCVPdf()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black shadow-sm flex items-center gap-1.5">
+                  <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                  <span>تصدير PDF عالي الدقة</span>
+                </button>
+                <button onclick="window.phiApp.setCVTab('edit')" class="px-4 py-2 rounded-xl bg-white border border-purple-200 text-[#7C3AED] font-bold">
+                  العودة للتعديل
+                </button>
+              </div>
+            </div>
+            
+            <div id="cv-preview-sheet" class="max-w-4xl mx-auto">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Portfolio Builder Content (Two Ways + Private Folder) -->
+        <div id="builder-pane-portfolio" class="hidden space-y-6">
+          <!-- Populated dynamically via renderPortfolioSection() -->
+        </div>
+
+      </div>
+
+      <!-- TAB 2: بطاقات Tima (Renamed from FIFA) -->
+      <!-- AI rates 0-99 on: تصوير / مونتاج / كتابة / تقديم / علاقات / ديجيتال -->
+      <!-- Card Design: Dark blue #1E1B4B background, gradient border purple-pink, φ logo top, student name, 6 stats with pink numbers, Overall circle gradient, Position e.g. "مراسل" / "مونتير" + Buttons "حمل بطاقتك" + "شارك في المعمل" -->
+      <div id="student-pane-tima" class="hidden space-y-8">
+        
+        <!-- ========================================================
+             INFINITE TIMA LEVELS (NO END) - HEADER & PROGRESS BAR
+             ======================================================== -->
+        <div class="bg-[#1E1B4B] rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-2xl border border-purple-900/60">
+          <div class="absolute -top-12 -right-12 w-48 h-48 bg-[#7C3AED]/30 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-[#EC4899]/25 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-purple-900/60">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-bold text-white bg-gradient-to-r from-[#7C3AED] to-[#EC4899] px-3.5 py-1 rounded-full shadow-sm font-mono">
+                  نظام المستويات اللانهائية • While(True) Leveling
+                </span>
+                <span id="tima-infinite-prestige-badge" class="hidden text-xs font-black px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/50">
+                  👑 Prestige 1
+                </span>
+              </div>
+              <!-- Show "المستوى ∞ - 47" + Icons -->
+              <h3 id="tima-infinite-level-title" class="text-2xl sm:text-4xl font-black text-white flex items-center gap-2.5">
+                <span>المستوى ∞ - 12</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-purple-200 mt-1">
+                تطور بصري مستمر لبطاقتك الإعلامية بدون حد أقصى — كل تحدٍ وسيمينار ينقلك لآفاق أسطورية جديدة.
+              </p>
+            </div>
+
+            <div class="text-left font-mono">
+              <span class="text-xs text-purple-300 block">إجمالي النقاط المكتسبة</span>
+              <span id="tima-infinite-points-total" class="text-2xl sm:text-3xl font-black text-[#EC4899]">
+                4,200 XP
+              </span>
+            </div>
+          </div>
+
+          <!-- Progress Bar Never Ends: "المستوى الجاي بعد 230 نقطة" -->
+          <div class="relative z-10 pt-5 space-y-2">
+            <div class="flex items-center justify-between text-xs sm:text-sm font-bold">
+              <span id="tima-infinite-progress-label" class="text-pink-300 font-mono">
+                المستوى الجاي بعد 800 نقطة
+              </span>
+              <span class="text-purple-300 font-mono">
+                المستويات مستمرة بلا نهاية ∞
+              </span>
+            </div>
+            <div class="w-full h-3.5 rounded-full bg-purple-950/80 border border-purple-800/80 p-0.5 overflow-hidden">
+              <div id="tima-infinite-progress-bar" class="h-full rounded-full bg-gradient-to-r from-[#7C3AED] via-pink-500 to-[#EC4899] shadow-md transition-all duration-500" style="width: 20%;"></div>
+            </div>
+          </div>
+
+          <!-- Prestige Button Container (Available at Level 50+) -->
+          <div id="tima-prestige-container" class="hidden mt-6 pt-5 border-t border-purple-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-amber-950/40 via-purple-950/60 to-pink-950/40 p-4 rounded-2xl border border-amber-500/30">
+            <div>
+              <div class="flex items-center gap-2 text-amber-300 font-black text-sm">
+                <span>👑</span>
+                <span>بوابة الـ Prestige للمستوى الأسطوري 50+</span>
+              </div>
+              <p class="text-xs text-purple-200 mt-0.5">ابدأ رحلة جديدة مع الاحتفاظ بشارة Prestige الدائمة ومضاعف نقاط خبرة.</p>
+            </div>
+            <button onclick="window.phiApp.triggerPrestige()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-pink-500 to-purple-600 hover:opacity-95 text-white font-black text-xs shadow-lg shadow-pink-500/25 shrink-0 flex items-center justify-center gap-2 cursor-pointer transition-all">
+              <i data-lucide="crown" class="w-4 h-4"></i>
+              <span>ابدأ رحلة جديدة مع الاحتفاظ بشارة Prestige</span>
+            </button>
+          </div>
+
+          <!-- Level 100+ Custom Theme Chooser -->
+          <div id="tima-custom-theme-picker" class="hidden mt-6 pt-5 border-t border-purple-900/60 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-300 flex items-center gap-1.5">
+                <span>🌌</span>
+                <span>تخصيص مظهر البطاقة (المستوى 100+):</span>
+              </span>
+              <span class="text-[11px] text-purple-300">اختر الثيم الأسطوري لبطاقتك</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2 text-xs">
+              <button onclick="window.phiApp.setCustomCardTheme('fire')" class="p-2 rounded-xl bg-red-950/80 hover:bg-red-900 border border-red-500/40 text-red-300 font-bold text-center">نار 🔥</button>
+              <button onclick="window.phiApp.setCustomCardTheme('emerald')" class="p-2 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 font-bold text-center">زمرد ⚡</button>
+              <button onclick="window.phiApp.setCustomCardTheme('cosmic')" class="p-2 rounded-xl bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-300 font-bold text-center">كوني 🌌</button>
+              <button onclick="window.phiApp.setCustomCardTheme('rainbow')" class="p-2 rounded-xl bg-purple-950/80 hover:bg-purple-900 border border-pink-500/40 text-pink-300 font-bold text-center">قوس قزح 🌈</button>
+              <button onclick="window.phiApp.setCustomCardTheme('holographic')" class="p-2 rounded-xl bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 font-bold text-center">هولوجرافيك 💎</button>
+              <button onclick="window.phiApp.setCustomCardTheme('cyber')" class="p-2 rounded-xl bg-fuchsia-950/80 hover:bg-fuchsia-900 border border-fuchsia-500/40 text-fuchsia-300 font-bold text-center">سايبر 🟣</button>
+              <button onclick="window.phiApp.setCustomCardTheme('mythic')" class="p-2 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-500/40 text-amber-300 font-bold text-center">ملكي 👑</button>
+            </div>
+          </div>
+
+          <!-- XP Simulator / Fast Testing Toolbar (while(true) leveling demo) -->
+          <div class="mt-5 pt-4 border-t border-purple-900/40 flex flex-wrap items-center gap-2 text-xs">
+            <span class="text-slate-400 font-bold text-[11px] ml-1">تجربة الارتقاء اللانهائي (XP Simulator):</span>
+            <button onclick="window.phiApp.addTimaPoints(500, 'تدريب سريع بالمعمل')" class="px-2.5 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 font-mono text-[11px] border border-purple-700/50">+500 XP</button>
+            <button onclick="window.phiApp.setTimaPoints(4200)" class="px-2.5 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 font-mono text-[11px] border border-purple-700/50">المستوى 12 (+2)</button>
+            <button onclick="window.phiApp.setTimaPoints(7200)" class="px-2.5 py-1 rounded-lg bg-red-950/70 hover:bg-red-900 text-red-200 font-mono text-[11px] border border-red-800/60">المستوى 15</button>
+            <button onclick="window.phiApp.setTimaPoints(12500)" class="px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-emerald-900 text-emerald-200 font-mono text-[11px] border border-emerald-800/60">المستوى 20</button>
+            <button onclick="window.phiApp.setTimaPoints(17500)" class="px-2.5 py-1 rounded-lg bg-indigo-950/70 hover:bg-indigo-900 text-indigo-200 font-mono text-[11px] border border-indigo-800/60">المستوى 25</button>
+            <button onclick="window.phiApp.setTimaPoints(22500)" class="px-2.5 py-1 rounded-lg bg-pink-950/70 hover:bg-pink-900 text-pink-200 font-mono text-[11px] border border-pink-800/60">المستوى 30</button>
+            <button onclick="window.phiApp.setTimaPoints(42500)" class="px-2.5 py-1 rounded-lg bg-cyan-950/70 hover:bg-cyan-900 text-cyan-200 font-mono text-[11px] border border-cyan-800/60">المستوى 50</button>
+            <button onclick="window.phiApp.setTimaPoints(92500)" class="px-2.5 py-1 rounded-lg bg-amber-950/70 hover:bg-amber-900 text-amber-200 font-mono text-[11px] border border-amber-800/60">المستوى 100+</button>
+            <button onclick="window.phiApp.setTimaPoints(1000)" class="px-2.5 py-1 rounded-lg bg-purple-950 hover:bg-purple-900 text-slate-400 font-mono text-[11px] border border-purple-800 mr-auto">تصفير (1,000 XP)</button>
+          </div>
+
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- The Official Tima Card Showcase (6 cols) -->
+          <div class="lg:col-span-6 flex justify-center">
+            
+            <!-- Card Outer: Dynamic Border & Glow (Formula: glowSize = 5 + level*0.5, borderWidth = 4 + floor(level/10)) -->
+            <div id="tima-card" class="p-[5px] bg-gradient-to-br from-[#7C3AED] via-[#EC4899] to-[#7C3AED] rounded-[2.5rem] shadow-2xl max-w-sm w-full glow-purple-pink transition-all duration-500">
+              
+              <!-- Dark Blue / Dynamic Theme Background Inside -->
+              <div id="tima-card-inner" class="bg-[#1E1B4B] rounded-[2.35rem] p-6 text-white relative overflow-hidden flex flex-col justify-between min-h-[550px] transition-all duration-500">
+                
+                <!-- Moving Stars Canvas for Cosmic & Holographic Themes -->
+                <canvas id="tima-stars-canvas" class="hidden"></canvas>
+
+                <!-- Ambient Subtle Blobs -->
+                <div class="absolute -top-10 -right-10 w-36 h-36 bg-[#EC4899]/20 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-10 -left-10 w-36 h-36 bg-[#7C3AED]/30 rounded-full blur-2xl pointer-events-none"></div>
+
+                <!-- Top Header: φ Logo, Tima Badge, Level Tag & Plus Badge -->
+                <div class="flex items-center justify-between pb-3 border-b border-white/10 relative z-10">
+                  <div class="flex items-center gap-2">
+                    <span class="text-2xl font-black text-[#7C3AED]">φ</span>
+                    <span class="text-[11px] font-black text-purple-200 tracking-wider">TO MEDIA</span>
+                  </div>
+
+                  <div class="flex items-center gap-1.5">
+                    <!-- +N Badge for Levels 11-14 -->
+                    <span id="tima-card-plus-tag" class="hidden font-mono font-black text-xs px-2 py-0.5 rounded-full bg-pink-500 text-white shadow-sm">
+                      +2
+                    </span>
+                    <!-- Level Tag with Icons -->
+                    <div id="tima-card-level-tag" class="flex items-center gap-1 bg-purple-950/80 px-2.5 py-1 rounded-full border border-purple-800/80 font-mono text-[11px] font-bold text-pink-300">
+                      <span>المستوى 12</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Middle: Overall in Gradient Circle + Position + Avatar -->
+                <div class="flex items-center justify-between my-4 relative z-10">
+                  
+                  <!-- Overall Circle Gradient -->
+                  <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-[#7C3AED] to-[#EC4899] flex items-center justify-center text-white font-black text-3xl shadow-lg shadow-pink-500/30">
+                      <span id="tima-card-ovr">93</span>
+                    </div>
+                    <span class="text-[11px] font-bold text-pink-300 mt-1 uppercase font-mono tracking-widest">OVERALL</span>
+                  </div>
+
+                  <!-- Position & Badge -->
+                  <div class="text-center">
+                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-b from-purple-900/50 to-[#17143A] border-2 border-purple-500/30 flex items-center justify-center overflow-hidden shadow-inner mx-auto mb-1">
+                      <span class="text-3xl">🎙️</span>
+                    </div>
+                    <span id="tima-card-pos" class="text-xs font-black text-pink-300 bg-purple-950 px-2.5 py-0.5 rounded-full border border-purple-800">
+                      مراسلة ومقدمة برامج
+                    </span>
+                  </div>
+
+                </div>
+
+                <!-- Student Name & Theme Name Tag -->
+                <div class="text-center my-1 relative z-10">
+                  <h3 id="tima-card-name" class="card-name text-xl font-black text-white tracking-wide">مريم حسام شريف</h3>
+                  <div class="flex items-center justify-center gap-2 mt-0.5">
+                    <span class="text-xs font-semibold text-purple-200">كلية الإعلام - دفعة 2025</span>
+                    <span class="text-slate-400">•</span>
+                    <span id="tima-card-theme-tag" class="text-[11px] font-bold text-pink-300 font-mono">مستوى متقدم (+2)</span>
+                  </div>
+                </div>
+
+                <!-- 6 Stats with Pink Numbers (#EC4899) -->
+                <!-- تصوير / مونتاج / كتابة / تقديم / علاقات / ديجيتال -->
+                <div class="grid grid-cols-2 gap-x-4 gap-y-2.5 bg-[#141238]/90 p-4 rounded-2xl border border-purple-900/60 my-3 relative z-10 text-xs">
+                  
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-[11px]">تصوير وإضاءة</span>
+                    <span id="tima-stat-filming" class="font-black text-[#EC4899] font-mono text-base">88</span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-[11px]">مونتاج وتلوين</span>
+                    <span id="tima-stat-montage" class="font-black text-[#EC4899] font-mono text-base">92</span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-[11px]">كتابة صحفية</span>
+                    <span id="tima-stat-writing" class="font-black text-[#EC4899] font-mono text-base">95</span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-[11px]">تقديم و Voice Over</span>
+                    <span id="tima-stat-presenting" class="font-black text-[#EC4899] font-mono text-base">98</span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-[11px]">علاقات واتصال</span>
+                    <span id="tima-stat-pr" class="font-black text-[#EC4899] font-mono text-base">90</span>
+                  </div>
+
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-white text-[11px]">ديجيتال ميديا</span>
+                    <span id="tima-stat-digital" class="font-black text-[#EC4899] font-mono text-base">94</span>
+                  </div>
+
+                </div>
+
+                <!-- Card Footer & Action Buttons Inside -->
+                <div class="flex items-center gap-2 pt-2 border-t border-purple-900/50 relative z-10">
+                  <button onclick="window.phiApp.downloadTimaCard()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-xs shadow-md">
+                    حمل بطاقتك 📥
+                  </button>
+                  <button onclick="window.phiApp.setStudentTab('lab')" class="flex-1 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-purple-400/40">
+                    شارك في المعمل 🚀
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- AI Work Evaluation Panel (6 cols) -->
+          <div class="lg:col-span-6 bg-white rounded-3xl p-6 border border-purple-100 shadow-sm space-y-4">
+            <div class="pb-3 border-b border-purple-50 flex items-center justify-between">
+              <div>
+                <h4 class="text-lg font-black text-[#7C3AED]">تقييم مهارات Tima</h4>
+                <p class="text-xs text-slate-500">قيم عملك الإعلامي الآن بالذكاء الاصطناعي φ لتحصل على درجتك النهائية (OVR) تلقائيا.</p>
+              </div>
+              <button onclick="window.phiApp.rateTimaWithAi()" class="px-3 py-1.5 rounded-xl bg-purple-50 text-[#EC4899] font-bold text-xs hover:bg-purple-100 border border-purple-200">
+                تقييم سريع بالـ AI ⚡
+              </button>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-[#1E1B4B] mb-1">المسمى المهني على البطاقة (Position)</label>
+              <input type="text" id="tima-custom-pos" value="مراسلة ومقدمة برامج" oninput="window.phiApp.updateTimaFromSliders()" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+            </div>
+
+            <!-- AI Work Input Box -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-[#1E1B4B]">اكتب نص عملك الإعلامي أو نبذة مشروعك *</label>
+              <textarea id="tima-work-input" rows="4" placeholder="مثال: تحقيق استقصائي حول سوق الخردة والنفايات الإلكترونية، تم تصويره بكاميرا سوني FX3 ومونتاج دافنشي، وتضمن 4 مقابلات ميدانية..." class="w-full px-3.5 py-3 rounded-2xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
+            </div>
+
+            <!-- Evaluate Button -->
+            <button onclick="window.phiApp.rateTimaWithAi()" id="btn-rate-tima-ai" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-md shadow-pink-500/20 hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>قيم هذا العمل لبطاقة Tima بالذكاء الاصطناعي 🌟</span>
+            </button>
+
+            <!-- OVR Result Box (appears only after evaluation button click) -->
+            <div id="tima-ai-feedback-box" class="hidden p-5 rounded-2xl bg-gradient-to-br from-purple-50 via-white to-pink-50 border border-purple-200 space-y-3">
+              <div class="flex items-center justify-between pb-2 border-b border-purple-100">
+                <span class="text-xs font-black text-[#1E1B4B] flex items-center gap-1.5">
+                  <i data-lucide="award" class="w-4 h-4 text-[#EC4899]"></i>
+                  <span>الدرجة النهائية لبطاقتك (OVR Score):</span>
+                </span>
+                <span id="tima-ai-feedback-score" class="font-black text-2xl text-[#EC4899] font-mono">92 OVR</span>
+              </div>
+
+              <!-- Skills breakdown (read-only badges) -->
+              <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                <div class="p-2.5 rounded-xl bg-white border border-purple-100 shadow-xs">
+                  <span class="block text-[10px] text-slate-400">تصوير وإضاءة</span>
+                  <span id="val-stat-filming" class="font-mono font-black text-[#EC4899] text-sm">88</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-purple-100 shadow-xs">
+                  <span class="block text-[10px] text-slate-400">مونتاج وتلوين</span>
+                  <span id="val-stat-montage" class="font-mono font-black text-[#EC4899] text-sm">92</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-purple-100 shadow-xs">
+                  <span class="block text-[10px] text-slate-400">كتابة وتحقيق</span>
+                  <span id="val-stat-writing" class="font-mono font-black text-[#EC4899] text-sm">95</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-purple-100 shadow-xs">
+                  <span class="block text-[10px] text-slate-400">تقديم و Voice Over</span>
+                  <span id="val-stat-presenting" class="font-mono font-black text-[#EC4899] text-sm">98</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-purple-100 shadow-xs">
+                  <span class="block text-[10px] text-slate-400">علاقات عامة</span>
+                  <span id="val-stat-pr" class="font-mono font-black text-[#EC4899] text-sm">90</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white border border-purple-100 shadow-xs">
+                  <span class="block text-[10px] text-slate-400">صناعة محتوى</span>
+                  <span id="val-stat-digital" class="font-mono font-black text-[#EC4899] text-sm">94</span>
+                </div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-purple-100/40 border border-purple-200/60 text-xs">
+                <span class="font-bold text-[#7C3AED] block mb-1">تقييم الذكاء الاصطناعي:</span>
+                <p id="tima-ai-feedback-text" class="text-slate-700 text-[11px] leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="pt-2 flex items-center gap-3">
+              <button onclick="window.phiApp.downloadTimaCard()" class="flex-1 py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-xs shadow-md">
+                حمل بطاقتك الآن
+              </button>
+              <button onclick="window.phiApp.setStudentTab('lab')" class="flex-1 py-3.5 rounded-2xl bg-purple-50 hover:bg-purple-100 text-[#7C3AED] font-bold text-xs border border-purple-200">
+                شارك في المعمل لزيادة الـ OVR
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- TAB 3: المعمل (THE LAB) -->
+      <!-- Weekly challenge + challenges grid + leaderboard + upload work + AI feedback -->
+      <div id="student-pane-lab" class="hidden space-y-10">
+        
+        <!-- Weekly Challenge Card (Gradient border, pink deadline badge) -->
+        <div class="p-[2.5px] bg-gradient-to-r from-[#7C3AED] to-[#EC4899] rounded-3xl shadow-xl">
+          <div class="bg-white rounded-[1.45rem] p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-[#EC4899] animate-ping"></span>
+                <span class="text-xs font-bold text-[#7C3AED] uppercase tracking-wider">تحدي الأسبوع الحصري</span>
+              </div>
+              <span class="self-start sm:self-auto px-3.5 py-1 rounded-full text-xs font-black bg-pink-100 text-[#EC4899] border border-pink-200 font-mono">
+                ⏳ ينتهي بعد: 3 أيام و14 ساعة
+              </span>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-black text-[#1E1B4B] mb-2">
+              صناعة قصة إنسانية استقصائية في 60 ثانية للريلز
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl mb-6">
+              المطلوب: إنتاج فيديو وثائقي رأسي يوثق قصة كفاح لأحد الحرفيين، مع هوك بصري في أول ثانيتين وإضاءة دافئة.
+            </p>
+
+            <div class="flex items-center justify-between pt-4 border-t border-purple-50 text-xs">
+              <span class="font-bold text-[#EC4899] font-mono">+500 نقطة Tima ورفع معدل الـ OVR</span>
+              <button onclick="document.getElementById('lab-submission-form').scrollIntoView({ behavior: 'smooth' })" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black shadow-md">
+                ارفع عملك الآن 🚀
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenges Grid -->
+        <div>
+          <h4 class="text-xl font-black text-[#1E1B4B] mb-4">تحديات المعمل النشطة</h4>
+          <div id="lab-challenges-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Upload Work + AI Feedback Form -->
+        <div id="lab-submission-form" class="bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm space-y-4">
+          <div class="pb-3 border-b border-purple-50">
+            <h4 class="text-lg font-black text-[#7C3AED] flex items-center gap-2">
+              <i data-lucide="upload-cloud" class="w-5 h-5 text-[#EC4899]"></i>
+              <span>رفع عملك واستقبال تقييم الذكاء الاصطناعي (AI Feedback)</span>
+            </h4>
+            <p class="text-xs text-slate-500">ارفع رابط الفيديو لاحتساب درجات التحدي وزيادة تقييم بطاقتك Tima فوراً.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-[#1E1B4B] mb-1">عنوان العمل</label>
+              <input type="text" id="lab-submit-title" placeholder="مثال: ريلز: حكاية عم حسن صانع النحاس" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#1E1B4B] mb-1">رابط المشاهدة (YouTube / Drive / Behance)</label>
+              <input type="url" id="lab-submit-link" dir="ltr" placeholder="https://youtube.com/shorts/..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
+            </div>
+          </div>
+
+          <button onclick="window.phiApp.submitLabWork()" id="btn-lab-submit" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-md transition-all">
+            قدّم عملك في التحدي واحصل على تقييم الـ AI
+          </button>
+        </div>
+
+        <!-- Submissions Feed with AI feedback -->
+        <div>
+          <h4 class="text-lg font-black text-[#1E1B4B] mb-3">تقييمات الذكاء الاصطناعي للأعمال المرفوعة</h4>
+          <div id="lab-submissions-feed">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Leaderboard Infinite: ترتيب عالمي لا نهائي -->
+        <div class="bg-[#1E1B4B] text-white p-6 sm:p-8 rounded-3xl shadow-2xl border border-purple-900/60">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-purple-900/60 mb-6">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">👑</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-lg sm:text-xl font-black text-white">لوحة شرف إعلام مصر - ترتيب عالمي (Infinite Leaderboard)</h3>
+                  <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-pink-500/20 text-[#EC4899] border border-pink-400/40 font-mono">
+                    ∞ لا نهائي
+                  </span>
+                </div>
+                <p class="text-xs text-purple-200 mt-0.5">ترتيب تنافسي عالمي مفتوح بدون حد أقصى للمستويات ونقاط تتجاوز المليون XP.</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-pink-300 font-mono font-bold bg-purple-950 px-3 py-1.5 rounded-xl border border-purple-800">
+                While(true) Leveling
+              </span>
+            </div>
+          </div>
+          <div id="leaderboard-list">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 4: المنتورز (List specialized mentors) -->
+      <div id="student-pane-mentors" class="hidden space-y-6">
+        <div>
+          <h3 class="text-2xl font-black text-[#1E1B4B]">نخبة الخبراء والمنتورز المتخصصين</h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">
+            اختر المنتور بحسب التخصص الدقيق واحجز جلسة توجيه فردية مع رابط Google Meet مباشر.
+          </p>
+        </div>
+
+        <!-- Mentors Grid (Ahmed, Sara, Youssef, Mariam) -->
+        <div id="mentors-grid-student" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- TAB 5: حول φ To Media (FAQ Component with the 5 questions) -->
+      <div id="student-pane-about" class="hidden space-y-8">
+        
+        <!-- Header Banner -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#1E1B4B] via-[#2D1B69] to-[#1E1B4B] p-6 sm:p-8 text-white shadow-xl border border-purple-800/40">
+          <div class="absolute -top-10 -right-10 w-44 h-44 bg-[#7C3AED]/25 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="absolute -bottom-10 -left-10 w-44 h-44 bg-[#EC4899]/25 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-2 max-w-2xl">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-purple-400/30 text-purple-200 text-xs font-bold">
+                <span class="w-2 h-2 rounded-full bg-[#EC4899] animate-pulse"></span>
+                <span>الأسئلة الشائعة ودليل المنظومة الإعلامية</span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                حول φ To Media
+              </h3>
+              <p class="text-xs sm:text-sm text-purple-200 leading-relaxed">
+                أسلوب حياة إعلامي، ليس مجرد أداة. تعرف على فلسفة المنصة، رؤيتنا، أهدافنا الاستراتيجية، ومجموعة الخدمات الذكية المخصصة لرواد الإعلام المستقبلي.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-[#7C3AED] to-[#EC4899] flex items-center justify-center font-black text-3xl sm:text-4xl shadow-xl shadow-pink-500/20 text-white">
+                φ
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Accordion List (5 Questions) -->
+        <div class="space-y-4">
+
+          <!-- Q1: من نكون؟ -->
+          <div class="bg-white rounded-3xl border border-purple-100 shadow-sm overflow-hidden transition-all hover:border-purple-300">
+            <button onclick="window.phiApp.toggleFaqItem(1)" class="w-full p-5 sm:p-6 text-right flex items-center justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center font-bold text-sm shrink-0">
+                  <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-[11px] font-bold text-[#EC4899] block mb-0.5">السؤال الأول</span>
+                  <h4 class="text-base sm:text-lg font-black text-[#1E1B4B]">من نكون؟</h4>
+                </div>
+              </div>
+              <div id="faq-chevron-1" class="w-8 h-8 rounded-xl bg-purple-50 text-[#7C3AED] flex items-center justify-center transition-transform duration-200 shrink-0 rotate-180">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div id="faq-ans-1" class="px-5 sm:px-6 pb-6 pt-1 text-slate-700 text-xs sm:text-sm leading-relaxed border-t border-purple-50 space-y-3">
+              <p class="font-medium text-[#1E1B4B]">
+                نحن <strong class="text-[#7C3AED]">φ To Media</strong>، المنظومة الإعلامية الرقمية المتكاملة والمدعومة بالذكاء الاصطناعي، وُلدنا من قلب الوسط الإعلامي المصري والعربي لنعيد تعريف العلاقة بين التعليم الأكاديمي واشتراطات سوق العمل الحقيقية.
+              </p>
+              <div class="bg-purple-50/70 p-4 rounded-2xl border border-purple-100 space-y-2">
+                <p class="font-bold text-[#1E1B4B] text-xs">نجمع تحت مظلة واحدة:</p>
+                <ul class="space-y-1.5 text-xs text-slate-700 list-disc list-inside pr-1">
+                  <li><strong class="text-purple-900">طلاب وخريجي كليات وأقسام الإعلام:</strong> الباحثين عن التميز الحقيقي وتطوير مهاراتهم العملية.</li>
+                  <li><strong class="text-purple-900">نخبة المنتورز والخبراء الممارسين:</strong> من كبرى المؤسسات الصحفية والشبكات التلفزيونية العالمية لنقل الخبرة الميدانية.</li>
+                  <li><strong class="text-purple-900">الشركات والمنصات واستوديوهات الإنتاج:</strong> الراغبة في الوصول المباشر لكفاءات جاهزة للإنتاج الفوري.</li>
+                </ul>
+              </div>
+              <p class="text-xs text-slate-600 bg-white p-3 rounded-xl border border-slate-100">
+                لسنا مجرد أداة برمجية؛ نحن الحاضنة المهنية التي تصقل مهاراتك عبر التقييم الذكي، وتوثق أعمالك ببورتفوليو وسيرة ذاتية بمعايير عالمية، وتمنحك بطاقة مهارات Tima معتمدة تؤهلك للمنافسة بقوة.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q2: ما هي أهدافنا؟ -->
+          <div class="bg-white rounded-3xl border border-purple-100 shadow-sm overflow-hidden transition-all hover:border-purple-300">
+            <button onclick="window.phiApp.toggleFaqItem(2)" class="w-full p-5 sm:p-6 text-right flex items-center justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center font-bold text-sm shrink-0">
+                  <i data-lucide="target" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-[11px] font-bold text-[#EC4899] block mb-0.5">السؤال الثاني</span>
+                  <h4 class="text-base sm:text-lg font-black text-[#1E1B4B]">ما هي أهدافنا؟</h4>
+                </div>
+              </div>
+              <div id="faq-chevron-2" class="w-8 h-8 rounded-xl bg-purple-50 text-[#7C3AED] flex items-center justify-center transition-transform duration-200 shrink-0 rotate-180">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div id="faq-ans-2" class="px-5 sm:px-6 pb-6 pt-1 text-slate-700 text-xs sm:text-sm leading-relaxed border-t border-purple-50">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 mt-2">
+                
+                <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-100 flex items-start gap-3">
+                  <span class="w-7 h-7 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 shadow-sm">
+                    01
+                  </span>
+                  <div>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm mb-1">سد الفجوة بين التعليم الأكاديمي وسوق العمل</h5>
+                    <p class="text-xs text-slate-600 leading-normal">
+                      تحويل المقررات النظرية إلى تدريب ميداني مستمر، وربط الطالب بأحدث أدوات الذكاء الاصطناعي وتقنيات الإنتاج الرقمي المعاصر.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-100 flex items-start gap-3">
+                  <span class="w-7 h-7 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 shadow-sm">
+                    02
+                  </span>
+                  <div>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm mb-1">إرساء معيار تقييم كفاءة موحد وموثوق (بطاقات Tima)</h5>
+                    <p class="text-xs text-slate-600 leading-normal">
+                      توفير بطاقة مهارية رقمية دقيقة تقيس القدرات الواقعية للطالب في (التصوير، المونتاج، الكتابة، التقديم، العلاقات العامة، والإعلام الرقمي) بعيداً عن التقديرات الورقية المجردة.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-100 flex items-start gap-3">
+                  <span class="w-7 h-7 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 shadow-sm">
+                    03
+                  </span>
+                  <div>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm mb-1">إتاحة التوجيه المهني الفردي المباشر (1-on-1 Mentorship)</h5>
+                    <p class="text-xs text-slate-600 leading-normal">
+                      تمكين الشباب من التعلم المباشر على يد كبار المتخصصين الممارسين في الصحف والقنوات الرائدة لنقل أسرار المهنة وثقافة غرف الأخبار.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-100 flex items-start gap-3">
+                  <span class="w-7 h-7 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 shadow-sm">
+                    04
+                  </span>
+                  <div>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm mb-1">توفير منظومة توظيف عادلة وشفافة للمؤسسات</h5>
+                    <p class="text-xs text-slate-600 leading-normal">
+                      تمكين شركات الإنتاج والقنوات من اكتشاف المواهب وفلترتها بالذكاء الاصطناعي (φ Scout) بسرعة فائقة، وتقليص تكاليف ومخاطر التوظيف التقليدي.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3: ما هي رؤيتنا؟ -->
+          <div class="bg-white rounded-3xl border border-purple-100 shadow-sm overflow-hidden transition-all hover:border-purple-300">
+            <button onclick="window.phiApp.toggleFaqItem(3)" class="w-full p-5 sm:p-6 text-right flex items-center justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center font-bold text-sm shrink-0">
+                  <i data-lucide="compass" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-[11px] font-bold text-[#EC4899] block mb-0.5">السؤال الثالث</span>
+                  <h4 class="text-base sm:text-lg font-black text-[#1E1B4B]">ما هي رؤيتنا؟</h4>
+                </div>
+              </div>
+              <div id="faq-chevron-3" class="w-8 h-8 rounded-xl bg-purple-50 text-[#7C3AED] flex items-center justify-center transition-transform duration-200 shrink-0 rotate-180">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div id="faq-ans-3" class="px-5 sm:px-6 pb-6 pt-1 text-slate-700 text-xs sm:text-sm leading-relaxed border-t border-purple-50">
+              <div class="space-y-3 mt-2">
+                
+                <div class="p-4 rounded-2xl bg-gradient-to-r from-purple-50/80 to-pink-50/50 border border-purple-100 flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-xl bg-purple-100 text-[#7C3AED] flex items-center justify-center font-bold text-xs shrink-0">
+                    ١
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm mb-1">جواز السفر المهني الأول لكل إعلامي عربي</h5>
+                    <p class="text-xs text-slate-600 leading-normal">
+                      أن تصبح بطاقة Tima وملف φ To Media هما المرجع المعياري المعتمد لدى جميع وكالات الأنباء، شركات الإنتاج، والمنصات الرقمية في الشرق الأوسط والعالم.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-gradient-to-r from-purple-50/80 to-pink-50/50 border border-purple-100 flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-xl bg-purple-100 text-[#7C3AED] flex items-center justify-center font-bold text-xs shrink-0">
+                    ٢
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm mb-1">قيادة التحول نحو الذكاء الاصطناعي الإعلامي المسؤول</h5>
+                    <p class="text-xs text-slate-600 leading-normal">
+                      تسخير خوارزميات التقييم والتحليل الذاتي لتمكين الإنسان المبدع وتعزيز صوته وهويته الفردية، لا استبداله أو إلغاء حسه الإنساني.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-gradient-to-r from-purple-50/80 to-pink-50/50 border border-purple-100 flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-xl bg-purple-100 text-[#7C3AED] flex items-center justify-center font-bold text-xs shrink-0">
+                    ٣
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm mb-1">تأسيس مجتمع إعلامي تعاوني متكامل ومستدام</h5>
+                    <p class="text-xs text-slate-600 leading-normal">
+                      خلق بيئة تفاعلية لا تنقطع فيها سلاسل الخبرة؛ حيث يتحول طالب اليوم إلى خبير الغد، وتتلاقى الطاقات الشابة مع المشاريع الاستثمارية والإنتاجات الكبرى.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4: لماذا φ To Media؟ -->
+          <div class="bg-white rounded-3xl border border-purple-100 shadow-sm overflow-hidden transition-all hover:border-purple-300">
+            <button onclick="window.phiApp.toggleFaqItem(4)" class="w-full p-5 sm:p-6 text-right flex items-center justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center font-bold text-sm shrink-0">
+                  <i data-lucide="zap" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-[11px] font-bold text-[#EC4899] block mb-0.5">السؤال الرابع</span>
+                  <h4 class="text-base sm:text-lg font-black text-[#1E1B4B]">لماذا φ To Media؟</h4>
+                </div>
+              </div>
+              <div id="faq-chevron-4" class="w-8 h-8 rounded-xl bg-purple-50 text-[#7C3AED] flex items-center justify-center transition-transform duration-200 shrink-0 rotate-180">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div id="faq-ans-4" class="px-5 sm:px-6 pb-6 pt-1 text-slate-700 text-xs sm:text-sm leading-relaxed border-t border-purple-50 space-y-3">
+              <div class="p-4 rounded-2xl bg-gradient-to-r from-[#1E1B4B] to-[#2D1B69] text-white space-y-2">
+                <span class="inline-block px-3 py-1 rounded-full bg-[#EC4899]/30 text-pink-300 font-bold text-xs">
+                  أسلوب حياة إعلامي، ليس مجرد أداة ⚡
+                </span>
+                <p class="text-xs sm:text-sm text-purple-100 leading-relaxed">
+                  لأن الأدوات تنتهي بانتهاء مهمتها السريعة، بينما <strong>"أسلوب الحياة"</strong> يرافقك في كل لحظة من مسيرتك ويبني هويتك الراسخة.
+                </p>
+              </div>
+              
+              <p class="text-xs sm:text-sm text-slate-700">
+                في <strong>φ To Media</strong>، لا نقدم لك مجرد قوالب جامدة أو محرر نصوص تقليدي، بل نصنع معك عاداتك وتفكيرك المهني اليومي:
+              </p>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                <div class="p-3 rounded-xl bg-purple-50 border border-purple-100 flex items-start gap-2">
+                  <span class="text-[#7C3AED] font-black">•</span>
+                  <span><strong>التفكير الصحفي:</strong> كيف تفكر كصحفي استقصائي يتحرى الحقيقة ويدقق المصادر قبل النشر.</span>
+                </div>
+                <div class="p-3 rounded-xl bg-purple-50 border border-purple-100 flex items-start gap-2">
+                  <span class="text-[#7C3AED] font-black">•</span>
+                  <span><strong>الحس الفني:</strong> كيف تزن اللقطة وزوايا الإضاءة والمونتاج بحس فني ناضج وواعٍ.</span>
+                </div>
+                <div class="p-3 rounded-xl bg-purple-50 border border-purple-100 flex items-start gap-2">
+                  <span class="text-[#7C3AED] font-black">•</span>
+                  <span><strong>المعمل التنافسي:</strong> كيف تختبر أفكارك ومشاريعك في "معمل التحديات" مع زملاء المهنة.</span>
+                </div>
+                <div class="p-3 rounded-xl bg-purple-50 border border-purple-100 flex items-start gap-2">
+                  <span class="text-[#7C3AED] font-black">•</span>
+                  <span><strong>النمو المستمر (OVR):</strong> كيف ترصد نمو مؤشرك الاحترافي يوماً بعد يوم وتسد نقاط ضعفك.</span>
+                </div>
+              </div>
+
+              <p class="text-xs text-slate-600 font-medium">
+                φ To Media هي هويتك ومجتمعك ومحطتك الأولى لكل تطور إعلامي – إنها ليست تطبيقاً تفتحه لدقائق، بل منظومة تعيش داخلها وتنمو معها.
+              </p>
+            </div>
+          </div>
+
+          <!-- Q5: ما هي خدماتنا؟ -->
+          <div class="bg-white rounded-3xl border border-purple-100 shadow-sm overflow-hidden transition-all hover:border-purple-300">
+            <button onclick="window.phiApp.toggleFaqItem(5)" class="w-full p-5 sm:p-6 text-right flex items-center justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center font-bold text-sm shrink-0">
+                  <i data-lucide="briefcase" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="text-[11px] font-bold text-[#EC4899] block mb-0.5">السؤال الخامس</span>
+                  <h4 class="text-base sm:text-lg font-black text-[#1E1B4B]">ما هي خدماتنا؟</h4>
+                </div>
+              </div>
+              <div id="faq-chevron-5" class="w-8 h-8 rounded-xl bg-purple-50 text-[#7C3AED] flex items-center justify-center transition-transform duration-200 shrink-0 rotate-180">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </button>
+            <div id="faq-ans-5" class="px-5 sm:px-6 pb-6 pt-1 text-slate-700 text-xs sm:text-sm leading-relaxed border-t border-purple-50">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 mt-2">
+
+                <!-- Service 1: CV -->
+                <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-100 space-y-1.5">
+                  <div class="flex items-center gap-2">
+                    <span class="p-1.5 rounded-lg bg-[#7C3AED] text-white">
+                      <i data-lucide="file-text" class="w-4 h-4"></i>
+                    </span>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm">صانع السيرة الذاتية الإعلامية الذكي (ATS Media CV)</h5>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-normal">
+                    نظام بناء سيرة ذاتية إعلامية في 8 خطوات تفاعلية، متوافق كلياً مع أنظمة الفرز الآلي الدولية ATS، ومدعوم بمقترحات الذكاء الاصطناعي لصياغة الإنجازات والمهام.
+                  </p>
+                </div>
+
+                <!-- Service 2: Portfolio -->
+                <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-100 space-y-1.5">
+                  <div class="flex items-center gap-2">
+                    <span class="p-1.5 rounded-lg bg-[#EC4899] text-white">
+                      <i data-lucide="tv" class="w-4 h-4"></i>
+                    </span>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm">البورتفوليو الرقمي التفاعلي (Interactive Portfolio)</h5>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-normal">
+                    مساحة عرض سينمائية خاصة بكل طالب لتوثيق التحقيقات، الأفلام الوثائقية، البرامج الإذاعية، والتصاميم بروابط تفاعلية سريعة وتصميم راقٍ يجذب مسؤولي التوظيف.
+                  </p>
+                </div>
+
+                <!-- Service 3: Challenge Lab with TIMA cards -->
+                <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-100 space-y-1.5">
+                  <div class="flex items-center gap-2">
+                    <span class="p-1.5 rounded-lg bg-[#7C3AED] text-white">
+                      <i data-lucide="award" class="w-4 h-4"></i>
+                    </span>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm">معمل التحديات وبطاقات مهارات Tima المعتمدة</h5>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-normal">
+                    تحديات تطبيقية حقيقية تحاكي ضغط العمل الإعلامي، تُمنح بموجبها بطاقة Tima المهارية الرقمية بدرجات دقيقة (0-99 OVR) تغطي أهم 6 ركائز للمحتوى والإعلام.
+                  </p>
+                </div>
+
+                <!-- Service 4: AI Evaluation -->
+                <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-100 space-y-1.5">
+                  <div class="flex items-center gap-2">
+                    <span class="p-1.5 rounded-lg bg-[#EC4899] text-white">
+                      <i data-lucide="brain" class="w-4 h-4"></i>
+                    </span>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm">نظام التقييم الذكي الفوري (AI Media Evaluation)</h5>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-normal">
+                    محرك φ المدعوم بنماذج الذكاء الاصطناعي المتقدمة لتحليل نصوص الاسكريبتات، التقارير الإخبارية، وأفكار البرامج وتقديم تقييم شامل ونقد بناء في ثوانٍ معدودة.
+                  </p>
+                </div>
+
+                <!-- Service 5: Talent discovery (phi Scout) -->
+                <div class="p-4 rounded-2xl bg-purple-50/70 border border-purple-100 space-y-1.5 md:col-span-2">
+                  <div class="flex items-center gap-2">
+                    <span class="p-1.5 rounded-lg bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white">
+                      <i data-lucide="search" class="w-4 h-4"></i>
+                    </span>
+                    <h5 class="font-bold text-[#1E1B4B] text-xs sm:text-sm">محرك استكشاف وتوظيف المواهب (Talent Discovery & φ Scout)</h5>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-normal">
+                    بوابة ذكية مخصصة للمؤسسات وشركات الإنتاج للبحث والفلترة الفورية بين طلاب مصر والوطن العربي، واختيار أفضل الكوادر المطابقة للاحتياج الفعلي بنقرة واحدة.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         4. MENTOR DASHBOARD
+         ====================================================== -->
+    <section id="view-mentor-app" class="hidden py-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Mentor Profile Header -->
+      <div class="bg-[#1E1B4B] text-white p-6 sm:p-8 rounded-3xl shadow-xl mb-8 relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-48 h-48 bg-[#7C3AED]/30 rounded-full blur-2xl"></div>
+        <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-[#EC4899]/30 rounded-full blur-2xl"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="flex items-center gap-4">
+            <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-[#7C3AED] to-[#EC4899] flex items-center justify-center font-black text-3xl shadow-lg">
+              🧠
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h2 id="mentor-dash-name" class="text-2xl font-black text-white">أحمد كمال الدين</h2>
+                <span class="text-xs font-bold px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  خبير معتمد
+                </span>
+              </div>
+              <p id="mentor-dash-specialty" class="text-xs text-purple-200 mt-1">تخصص: مونتاج بريمير ودافنشي • مونتير في الجزيرة</p>
+            </div>
+          </div>
+
+          <!-- Quick Stats Cards (Earnings & Bookings) -->
+          <div class="flex items-center gap-4">
+            <div class="bg-purple-950/80 p-4 rounded-2xl border border-purple-800 text-center min-w-[120px]">
+              <span class="text-[10px] text-purple-300 block font-bold">أرباحي الإجمالية</span>
+              <span id="mentor-dash-earnings" class="text-lg font-black text-[#EC4899] font-mono">13,600 ج.م</span>
+            </div>
+            <div class="bg-purple-950/80 p-4 rounded-2xl border border-purple-800 text-center min-w-[120px]">
+              <span class="text-[10px] text-purple-300 block font-bold">جلسات الحجز</span>
+              <span id="mentor-dash-bookings-count" class="text-lg font-black text-white font-mono">68 سيشن</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bookings Requests & Schedule -->
+      <div class="space-y-4">
+        <h3 class="text-xl font-black text-[#1E1B4B]">طلبات الحجز وجلساتي القادمة</h3>
+        <div id="mentor-bookings-list">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         5. COMPANY / NEWSPAPERS DASHBOARD
+         ====================================================== -->
+    <section id="view-company-app" class="hidden py-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      
+      <!-- Company Profile Header -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#7C3AED] to-[#EC4899] text-white flex items-center justify-center text-3xl font-black shadow-md">
+            🏢
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 id="company-dash-name" class="text-2xl font-black text-[#1E1B4B]">شبكة أوان للإنتاج الإعلامي</h2>
+              <span id="company-dash-type" class="text-xs font-bold text-[#7C3AED] bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-100">شركة انتاج</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">البحث عن مواهب إعلامية متميزة في الإخراج، المونتاج، والتحقيقات الصحفية.</p>
+          </div>
+        </div>
+
+        <button onclick="document.getElementById('company-create-job-pane').scrollIntoView({ behavior: 'smooth' })" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-xs sm:text-sm shadow-md flex items-center gap-2 shrink-0">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>انشاء فرصة تدريب / توظيف</span>
+        </button>
+      </div>
+
+      <!-- ========================================================
+           PHI SCOUT: AI MEDIA RECRUITMENT ASSISTANT
+           ======================================================== -->
+      <div id="company-phi-scout-pane" class="bg-gradient-to-br from-[#1E1B4B] via-[#2E1065] to-[#1E1B4B] rounded-3xl p-6 sm:p-8 text-white border border-purple-500/30 shadow-xl shadow-purple-900/20 space-y-6 relative overflow-hidden">
+        
+        <!-- Background decorative ambient circles -->
+        <div class="absolute -top-24 -left-24 w-72 h-72 bg-[#EC4899]/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-[#7C3AED]/25 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-400/30 text-pink-300 text-xs font-black">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-pink-400"></i>
+              <span>مساعد التوظيف بالذكاء الاصطناعي ⚡ φ Scout</span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-2">
+              <span>اسأل φ Scout لاختيار أفضل 5 كوادر إعلامية</span>
+            </h3>
+            <p class="text-xs sm:text-sm text-purple-200/80 max-w-2xl leading-relaxed">
+              مساعد التوظيف الذكي لقنوات وشركات الميديا. يحلل مهارات الطلاب، الـ OVR، السجل الأكاديمي، والموقع الجغرافي.
+              <span class="text-pink-300 font-bold block sm:inline mt-1 sm:mt-0 sm:mr-1">شرط الكفاءة: ممنوع اختيار أي ملف يقل عن 70 OVR نهائياً.</span>
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="window.phiApp.toggleScoutJsonView()" id="btn-toggle-scout-json" class="px-3.5 py-2 rounded-xl bg-purple-950/70 hover:bg-purple-900 border border-purple-400/30 text-purple-200 text-xs font-bold transition-all flex items-center gap-1.5">
+              <i data-lucide="code" class="w-3.5 h-3.5 text-pink-400"></i>
+              <span id="txt-toggle-scout-json">عرض الـ JSON المستخرج</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Query Presets -->
+        <div class="relative space-y-2">
+          <label class="block text-xs font-bold text-purple-300">أمثلة سريعة لأسئلة التوظيف الشائعة:</label>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <button onclick="window.phiApp.applyScoutPreset('محتاجين مونتير شاطر وسريع في الأفتر إفكتس والبريمير في القاهرة')" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all text-[11px] sm:text-xs">
+              🎬 مونتير وموشن جرافيك (القاهرة)
+            </button>
+            <button onclick="window.phiApp.applyScoutPreset('عاوزين مذيعة ومراسلة ميدانية لبقة وجريئة في التغطيات الحية')" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all text-[11px] sm:text-xs">
+              🎤 مراسلة ومقدمة برامج حوارية
+            </button>
+            <button onclick="window.phiApp.applyScoutPreset('بدور على مدير تصوير ومصور وثائقيات سينمائي وإضاءة درامية')" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all text-[11px] sm:text-xs">
+              🎥 مدير تصوير سينمائي ووثائقي
+            </button>
+            <button onclick="window.phiApp.applyScoutPreset('مطلوب صحفية استقصائية شاطرة في كتابة السكريبت والتحقيقات')" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all text-[11px] sm:text-xs">
+              ✍️ صحافة استقصائية وسكريبت
+            </button>
+            <button onclick="window.phiApp.applyScoutPreset('محتاجين متخصص سوشيال ميديا وإدارة حملات وعلاقات عامة')" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all text-[11px] sm:text-xs">
+              📱 علاقات عامة وديجيتال ميديا
+            </button>
+            <button onclick="window.phiApp.applyScoutPreset('عاوزين مهندس صوت وميكساج لإنتاج بودكاست')" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all text-[11px] sm:text-xs">
+              🎙️ هندسة صوت وبودكاست
+            </button>
+          </div>
+        </div>
+
+        <!-- Query Input Box & Ask Button -->
+        <div class="relative flex flex-col sm:flex-row gap-3">
+          <div class="flex-1 relative">
+            <input type="text" id="phi-scout-query-input" placeholder="اكتب سؤال شركتك هنا.. مثلاً: 'محتاجين مونتير شاطر في الأفتر إفكتس وسريع في القاهرة'..." class="w-full px-4 py-3.5 pr-11 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-purple-300/50 text-xs sm:text-sm outline-none focus:border-pink-400 focus:bg-white/15 transition-all">
+            <div class="absolute right-3.5 top-1/2 -translate-y-1/2 text-purple-300 pointer-events-none">
+              <i data-lucide="search" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <button onclick="window.phiApp.askPhiScout()" id="btn-phi-scout-ask" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#EC4899] to-[#7C3AED] text-white font-black text-xs sm:text-sm shadow-lg shadow-pink-500/25 hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+            <span>اسأل φ Scout</span>
+          </button>
+        </div>
+
+        <!-- JSON Output Viewer (Collapsible) -->
+        <div id="phi-scout-json-box" class="hidden relative rounded-2xl bg-black/60 border border-purple-500/30 p-4 space-y-2">
+          <div class="flex items-center justify-between text-xs pb-2 border-b border-white/10">
+            <span class="font-mono text-pink-300 font-bold flex items-center gap-1.5">
+              <i data-lucide="file-json" class="w-3.5 h-3.5"></i>
+              <span>صيغة الرد المطلوبة: {reason, matched_skills, card_id}</span>
+            </span>
+            <button onclick="window.phiApp.copyScoutJson()" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-purple-200 text-[11px] font-bold flex items-center gap-1">
+              <i data-lucide="copy" class="w-3 h-3"></i>
+              <span id="btn-copy-scout-txt">نسخ الـ JSON</span>
+            </button>
+          </div>
+          <pre id="phi-scout-json-pre" class="font-mono text-xs text-emerald-400 overflow-x-auto max-h-60 p-2 leading-relaxed dir-ltr text-left"></pre>
+        </div>
+
+        <!-- Recommendations Container -->
+        <div id="phi-scout-results-container" class="relative space-y-4 pt-2">
+          <!-- Default prompt state or populated dynamically via JS -->
+          <div id="phi-scout-empty-state" class="p-6 rounded-2xl bg-white/5 border border-white/10 text-center space-y-2">
+            <div class="w-12 h-12 rounded-full bg-pink-500/20 text-pink-400 mx-auto flex items-center justify-center text-xl font-black">
+              φ
+            </div>
+            <h4 class="text-sm font-bold text-white">φ Scout جاهز للبحث عن أفضل 5 كوادر لشركتك</h4>
+            <p class="text-xs text-purple-200/70">اضغط على أحد الأمثلة السريعة أعلاه أو اكتب طلبك واضغط "اسأل φ Scout".</p>
+          </div>
+
+          <!-- Cards list -->
+          <div id="phi-scout-cards-list" class="hidden grid grid-cols-1 gap-4">
+            <!-- Populated via renderPhiScoutResults() -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Talent Pool: Filter and browse students -->
+      <div class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-xl font-black text-[#1E1B4B]">مستودع المواهب (Talent Pool)</h3>
+            <p class="text-xs text-slate-500 mt-0.5">تصفح طلاب وخريجي إعلام مصر ببطاقات Tima الموثقة وتواصل معهم مباشرة.</p>
+          </div>
+        </div>
+
+        <!-- Talent Filter Bar -->
+        <div class="bg-white p-4 rounded-2xl border border-purple-100 shadow-sm grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+          <div>
+            <label class="block font-bold text-[#1E1B4B] mb-1">القسم الأكاديمي</label>
+            <select id="filter-talent-dept" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
+              <option value="all">جميع الأقسام</option>
+              <option value="صحافة">صحافة ونشر</option>
+              <option value="إذاعة وتلفزيون">إذاعة وتلفزيون</option>
+              <option value="علاقات عامة">علاقات عامة</option>
+              <option value="ديجيتال">ديجيتال ميديا</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-[#1E1B4B] mb-1">شرط المهارة في بطاقة Tima</label>
+            <select id="filter-talent-skill" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
+              <option value="all">أي مهارة</option>
+              <option value="montage">مونتاج (Montage)</option>
+              <option value="filming">تصوير (Filming)</option>
+              <option value="writing">كتابة (Writing)</option>
+              <option value="presenting">تقديم (Presenting)</option>
+              <option value="pr">علاقات عامة (PR)</option>
+              <option value="digital">ديجيتال (Digital)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-[#1E1B4B] mb-1">الحد الأدنى لدرجة المهارة</label>
+            <select id="filter-talent-min-score" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none font-mono">
+              <option value="0">بدون حد أدنى</option>
+              <option value="80">+80 فما فوق</option>
+              <option value="85">+85 فما فوق</option>
+              <option value="90">+90 (نخبة)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-bold text-[#1E1B4B] mb-1">بحث بالاسم أو التخصص</label>
+            <input type="text" id="filter-talent-search" oninput="window.phiApp.filterTalentPool()" placeholder="بحث..." class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
+          </div>
+        </div>
+
+        <!-- Talent Pool Grid -->
+        <div id="company-talent-pool-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- Applications: Who applied to company jobs -->
+      <div class="space-y-4">
+        <h3 class="text-xl font-black text-[#1E1B4B]">المتقدمون لفرص التوظيف والتدريب لديك</h3>
+        <div id="company-applications-list">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- Create Job Section -->
+      <div id="company-create-job-pane" class="bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm space-y-4">
+        <h4 class="text-lg font-black text-[#7C3AED] pb-2 border-b border-purple-50">انشاء فرصة تدريب / توظيف جديدة</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-[#1E1B4B] mb-1">عنوان الفرصة</label>
+            <input type="text" id="job-create-title" placeholder="مثال: متدرب مونتاج بريمير ودافنشي" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#1E1B4B] mb-1">نوع الفرصة</label>
+            <select id="job-create-type" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
+              <option value="تدريب">تدريب عملي (Internship)</option>
+              <option value="فريلانس">مشروع فريلانس (Freelance)</option>
+              <option value="دوام">دوام كامل (Full-time)</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-[#1E1B4B] mb-1">المهارة المشترطة في بطاقة Tima</label>
+            <select id="job-create-skill" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
+              <option value="montage">مونتاج (Montage)</option>
+              <option value="filming">تصوير (Filming)</option>
+              <option value="writing">كتابة صحفية (Writing)</option>
+              <option value="presenting">تقديم و Voice Over (Presenting)</option>
+              <option value="pr">علاقات عامة (PR)</option>
+              <option value="digital">ديجيتال ميديا (Digital)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#1E1B4B] mb-1">الحد الأدنى لدرجة المهارة (مثال: فوق 80)</label>
+            <input type="number" id="job-create-score" value="80" min="50" max="99" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none font-mono">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-[#1E1B4B] mb-1">وصف الفرصة والمتطلبات</label>
+          <textarea id="job-create-desc" rows="3" placeholder="اكتب تفاصيل الفرصة والمهام المطلوبة..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none"></textarea>
+        </div>
+        <button onclick="window.phiApp.createCompanyJob()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-md">
+          نشر الفرصة في المنظومة 📢
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         6. ADMIN DASHBOARD (/admin pass phi2026)
+         ====================================================== -->
+    <section id="view-admin-app" class="hidden py-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      
+      <!-- Admin Header -->
+      <div class="bg-[#1E1B4B] text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono text-pink-300">ADMIN CONTROL CONSOLE (phi2026)</span>
+          <h2 class="text-2xl font-black text-white mt-1">لوحة إدارة ومنظومة أمان φ To Media</h2>
+          <p class="text-xs text-purple-200">التحكم في التحديات، إيرادات الجلسات، واعتماد المنتورز، ومكافحة الحسابات الوهمية والنصب.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="window.phiApp.navigateView('landing')" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all">
+            خروج من الإدارة
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Tabs Navigation -->
+      <div class="flex items-center gap-2 bg-purple-50 p-2 rounded-2xl border border-purple-200">
+        <button id="admin-tab-btn-overview" onclick="window.phiApp.setAdminSubTab('overview')" class="flex-1 py-3 rounded-xl font-black text-xs sm:text-sm bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white shadow-md transition-all text-center flex items-center justify-center gap-2">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+          <span>نظرة عامة والتحديات</span>
+        </button>
+        <button id="admin-tab-btn-protection" onclick="window.phiApp.setAdminSubTab('protection')" class="flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm text-[#7C3AED] hover:bg-purple-100/60 transition-all text-center flex items-center justify-center gap-2">
+          <i data-lucide="shield-alert" class="w-4 h-4 text-rose-500"></i>
+          <span>🛡️ البلاغات والحماية والتوثيق</span>
+          <span id="admin-badge-pending-reports" class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-rose-500 text-white font-bold">2</span>
+        </button>
+      </div>
+
+      <!-- SUB-TAB 1: OVERVIEW & CHALLENGES -->
+      <div id="admin-pane-overview" class="space-y-6">
+        <!-- Overview Stats (5 cards) -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">
+          <div class="bg-white p-5 rounded-2xl border border-purple-100 shadow-sm">
+            <span class="text-xs text-slate-400 block font-bold mb-1">عدد الطلاب</span>
+            <span id="admin-stat-students" class="text-xl font-black text-[#7C3AED] font-mono">1,240</span>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-purple-100 shadow-sm">
+            <span class="text-xs text-slate-400 block font-bold mb-1">عدد المنتورز</span>
+            <span id="admin-stat-mentors" class="text-xl font-black text-[#EC4899] font-mono">48</span>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-purple-100 shadow-sm">
+            <span class="text-xs text-slate-400 block font-bold mb-1">المؤسسات والشركات</span>
+            <span id="admin-stat-companies" class="text-xl font-black text-[#1E1B4B] font-mono">86</span>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-purple-100 shadow-sm">
+            <span class="text-xs text-slate-400 block font-bold mb-1">إجمالي الحجوزات</span>
+            <span id="admin-stat-bookings" class="text-xl font-black text-[#7C3AED] font-mono">314</span>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-purple-100 shadow-sm col-span-2 sm:col-span-1">
+            <span class="text-xs text-slate-400 block font-bold mb-1">إجمالي الإيرادات</span>
+            <span id="admin-stat-revenue" class="text-xl font-black text-[#EC4899] font-mono">62,400 ج.م</span>
+          </div>
+        </div>
+
+        <!-- Challenge Creator for Admin -->
+        <div class="bg-white rounded-3xl p-6 border border-purple-100 shadow-sm space-y-4">
+          <h4 class="text-base font-black text-[#7C3AED]">انشاء تحدي جديد في المعمل</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-[#1E1B4B] mb-1">عنوان التحدي</label>
+              <input type="text" id="admin-ch-title" placeholder="مثال: تحدي تغطية ريلز ميداني" class="w-full px-3 py-2 rounded-xl bg-purple-50/60 border border-purple-200 text-xs outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#1E1B4B] mb-1">القسم</label>
+              <select id="admin-ch-cat" class="w-full px-3 py-2 rounded-xl bg-purple-50/60 border border-purple-200 text-xs outline-none">
+                <option value="مونتاج">مونتاج</option>
+                <option value="تصوير">تصوير</option>
+                <option value="صحافة">صحافة</option>
+                <option value="تقديم">تقديم</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#1E1B4B] mb-1">النقاط (XP)</label>
+              <input type="number" id="admin-ch-points" value="300" class="w-full px-3 py-2 rounded-xl bg-purple-50/60 border border-purple-200 text-xs outline-none font-mono">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#1E1B4B] mb-1">وصف التحدي</label>
+            <input type="text" id="admin-ch-desc" placeholder="المطلوب في التحدي..." class="w-full px-3 py-2 rounded-xl bg-purple-50/60 border border-purple-200 text-xs outline-none">
+          </div>
+          <button onclick="window.phiApp.createAdminChallenge()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-bold text-xs shadow-md">
+            إطلاق التحدي رسمياً
+          </button>
+        </div>
+
+        <!-- Challenges Table -->
+        <div class="bg-white rounded-3xl p-6 border border-purple-100 shadow-sm overflow-x-auto">
+          <h4 class="text-base font-black text-[#1E1B4B] mb-4">جدول التحديات النشطة</h4>
+          <table class="w-full text-right border-collapse">
+            <thead>
+              <tr class="border-b border-purple-100 text-xs font-bold text-slate-400">
+                <th class="p-3">عنوان التحدي</th>
+                <th class="p-3">التصنيف</th>
+                <th class="p-3">النقاط</th>
+                <th class="p-3">المشاركون</th>
+                <th class="p-3">الحالة</th>
+              </tr>
+            </thead>
+            <tbody id="admin-challenges-table">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 2: PROTECTION, REPORTS & VERIFICATION -->
+      <div id="admin-pane-protection" class="hidden space-y-8">
+        
+        <!-- Protection Stats Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-gradient-to-br from-amber-500/10 to-amber-500/5 p-5 rounded-2xl border border-amber-200 flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold text-amber-700 block">طلبات التوثيق المعلقة</span>
+              <span id="stat-pending-verifications-count" class="text-2xl font-black text-amber-800 font-mono">2</span>
+              <p class="text-[10px] text-amber-600 mt-0.5">منتورز ومؤسسات بانتظار المراجعة</p>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
+              ⏳
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-rose-500/10 to-rose-500/5 p-5 rounded-2xl border border-rose-200 flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold text-rose-700 block">إجمالي بلاغات النصب</span>
+              <span id="stat-total-reports-count" class="text-2xl font-black text-rose-800 font-mono">2</span>
+              <p class="text-[10px] text-rose-600 mt-0.5">3 بلاغات = تجميد آلي فوري</p>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl font-bold">
+              🚩
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-[#1E1B4B]/10 to-[#1E1B4B]/5 p-5 rounded-2xl border border-purple-200 flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold text-[#1E1B4B] block">عناوين IP المحظورة</span>
+              <span id="stat-blacklisted-ips-count" class="text-2xl font-black text-[#1E1B4B] font-mono">2</span>
+              <p class="text-[10px] text-slate-500 mt-0.5">حظر صارم لمنع تكرار الاحتيال</p>
+            </div>
+            <div class="w-12 h-12 rounded-2xl bg-purple-100 text-[#7C3AED] flex items-center justify-center text-xl font-bold">
+              🚫
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 1: Pending Verifications -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-purple-50">
+            <div>
+              <h4 class="text-lg font-black text-[#1E1B4B] flex items-center gap-2">
+                <i data-lucide="badge-check" class="w-5 h-5 text-[#7C3AED]"></i>
+                <span>طلبات التوثيق للمنتورز والشركات (Verification Requests)</span>
+              </h4>
+              <p class="text-xs text-slate-500">لا يمكن لأي منتور أو مؤسسة الظهور في المنصة بدون اعتماد الإدارة وفحص المستندات الرسمية.</p>
+            </div>
+            <span class="text-xs font-bold text-purple-700 bg-purple-50 px-3 py-1 rounded-full border border-purple-200">
+              شرط الظهور: الاعتماد الإداري
+            </span>
+          </div>
+
+          <div id="admin-pending-verifications-list" class="space-y-4">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Section 2: Reports & Scam Inquiries -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-purple-50">
+            <div>
+              <h4 class="text-lg font-black text-rose-700 flex items-center gap-2">
+                <i data-lucide="shield-alert" class="w-5 h-5 text-rose-600"></i>
+                <span>بلاغات النصب والحسابات الوهمية (Anti-Scam Reports)</span>
+              </h4>
+              <p class="text-xs text-slate-500">مراقبة فورية للبلاغات. إذا بلغ عدد الشكاوى 3 بلاغات، يُجمد الحساب آلياً ويُخفى تماماً.</p>
+            </div>
+
+            <!-- Filter Reports -->
+            <div class="flex items-center gap-2 text-xs">
+              <span class="text-slate-400 font-bold">الحالة:</span>
+              <select id="admin-reports-filter" onchange="window.phiApp.renderAdminReports()" class="px-3 py-1.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none font-bold text-[#1E1B4B]">
+                <option value="all">جميع البلاغات</option>
+                <option value="pending" selected>قيد المراجعة</option>
+                <option value="approved_banned">تم الحظر النهائي</option>
+                <option value="warned">تم توجيه تحذير</option>
+                <option value="rejected">مرفوضة</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="admin-reports-list" class="space-y-4">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Section 3: IP Blacklist -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm space-y-6">
+          <div class="pb-3 border-b border-purple-50 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h4 class="text-lg font-black text-[#1E1B4B] flex items-center gap-2">
+                <i data-lucide="ban" class="w-5 h-5 text-rose-600"></i>
+                <span>القائمة السوداء لعناوين IP (Blacklist IPs)</span>
+              </h4>
+              <p class="text-xs text-slate-500">حظر عناوين الشبكة للأجهزة التي حاولت النصب أو إرسال طلبات دفع خارجية.</p>
+            </div>
+          </div>
+
+          <!-- Add IP Form -->
+          <div class="bg-purple-50/50 p-4 rounded-2xl border border-purple-200 grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+            <div>
+              <label class="block text-xs font-bold text-[#1E1B4B] mb-1">عنوان الـ IP</label>
+              <input type="text" id="admin-new-ip" placeholder="مثال: 197.34.88.12" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-purple-200 text-xs font-mono outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#1E1B4B] mb-1">سبب الحظر</label>
+              <input type="text" id="admin-new-ip-reason" placeholder="مثال: طلب تحويلات فودافون كاش احتيالية" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-purple-200 text-xs outline-none">
+            </div>
+            <button onclick="window.phiApp.addIpToBlacklist()" class="py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>إضافة للقائمة السوداء</span>
+            </button>
+          </div>
+
+          <!-- Blacklist Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-right border-collapse text-xs">
+              <thead>
+                <tr class="border-b border-purple-100 text-slate-400 font-bold">
+                  <th class="p-3">عنوان IP</th>
+                  <th class="p-3">سبب الحظر</th>
+                  <th class="p-3">التاريخ</th>
+                  <th class="p-3">بواسطة</th>
+                  <th class="p-3 text-center">الإجراء</th>
+                </tr>
+              </thead>
+              <tbody id="admin-blacklist-ips-table">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================
+         7. PRIVACY & ANTI-SCAM POLICY PAGE (/privacy route)
+         ====================================================== -->
+    <section id="view-privacy" class="hidden py-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <!-- Privacy Header (Dark Blue #1E1B4B with Purple/Pink Accents) -->
+      <div class="bg-[#1E1B4B] text-white p-8 sm:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-56 h-56 bg-[#7C3AED]/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -left-12 w-56 h-56 bg-[#EC4899]/30 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-3.5 py-1 rounded-full text-xs font-black bg-pink-500/20 text-[#EC4899] border border-pink-400/40">
+              🛡️ ميثاق الأمان وحماية الوسط الإعلامي
+            </span>
+            <span class="text-xs text-purple-200 font-mono">v2026.1 Official</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-black text-white leading-tight">
+            وثيقة الشروط والأمان ومكافحة الاحتيال والحسابات الوهمية
+          </h1>
+          <p class="text-sm sm:text-base text-purple-200 mt-2 max-w-3xl leading-relaxed">
+            في منصة <span class="font-bold text-white">φ To Media</span>، حماية الطلاب وخريجي كليات الإعلام وصناع المحتوى خط أحمر. هذه الوثيقة توضح سياساتنا الصارمة لضمان بيئة آمنة وخالية من النصب والحسابات المزيفة.
+          </p>
+          <div class="flex items-center gap-3 mt-6">
+            <button onclick="window.phiApp.navigateView('landing')" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-all">
+              ← العودة للرئيسية
+            </button>
+            <button onclick="window.phiApp.startOnboarding()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-bold text-xs shadow-md transition-all">
+              الانضمام للمنظومة الآن
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Policy Clauses Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Clause 1: حظر طلب الأموال المباشر -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-rose-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-xl">
+            🚫
+          </div>
+          <h3 class="text-lg font-black text-[#1E1B4B]">1. حظر التعاملات المالية الخارجية وفودافون كاش</h3>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            يُمنع منعاً باتاً على أي منتور أو ممثل مؤسسة طلب تحويل مبالغ مالية عبر محافظ إلكترونية مثل "فودافون كاش" أو طلب تحويلات بنكية مباشرة خارج نظام جلسات المنصة المعتمد. أي محاولة لطلب مبالغ مادية تعد احتيالاً وتؤدي إلى الحظر الفوري.
+          </p>
+        </div>
+
+        <!-- Clause 2: منع الكورسات الوهمية -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-purple-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center font-bold text-xl">
+            🎓
+          </div>
+          <h3 class="text-lg font-black text-[#1E1B4B]">2. حظر بيع الكورسات والشهادات غير المعتمدة</h3>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            تمنع المنصة استخدام الجلسات أو المحادثات في الترويج لكورسات مدفوعة خارجية أو وعود بشهادات معتمدة وهمية مقابل رسوم. المنتور يقدم فقط جلسات توجيه مهنية 1-on-1 ومراجعة بورتفوليو وفق الأسعار المعلنة رسمياً.
+          </p>
+        </div>
+
+        <!-- Clause 3: التوثيق الإلزامي للمنتورز والشركات -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-purple-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-purple-50 text-[#EC4899] flex items-center justify-center font-bold text-xl">
+            📑
+          </div>
+          <h3 class="text-lg font-black text-[#1E1B4B]">3. التوثيق الإلزامي وفحص الهوية قبل الظهور</h3>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            لا يظهر أي حساب منتور أو شركة في قوائم المنصة العامة إلا بعد مراجعة يدوية من إدارة المنصة ورفع أوراق ثبوتية: (إثبات هوية رسمي + رابط أعمال حقيقي للمنتور) و(سجل تجاري مرخص + بريد رسمي نطاق المؤسسة @company.com للشركات).
+          </p>
+        </div>
+
+        <!-- Clause 4: نظام الحظر التلقائي (3 بلاغات) -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-rose-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-xl">
+            ⚡
+          </div>
+          <h3 class="text-lg font-black text-[#1E1B4B]">4. نظام التجميد الآلي عند 3 بلاغات (Auto-Freeze)</h3>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            إذا تلقى أي حساب 3 بلاغات متطابقة من مستخدمين مختلفين (حساب وهمي / يطلب فلوس / كورس مدفوع / تحرش)، يتم تجميد الحساب آلياً وإخفاؤه فوراً من كافة القوائم والتطبيقات لحين انتهاء التحقيق الإداري.
+          </p>
+        </div>
+
+        <!-- Clause 5: الفلتر الذكي لكلمات الاحتيال -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-purple-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center font-bold text-xl">
+            🔍
+          </div>
+          <h3 class="text-lg font-black text-[#1E1B4B]">5. الرصد الآلي للكلمات الاحتيالية</h3>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            يقوم نظام المراقبة بمسح الرسائل والنبذات التعريفية لرصد المصطلحات المشبوهة (مثل: "كورس مدفوع"، "حول فلوس"، "فودافون كاش"، "شهادة معتمدة ب"، "2000 جنيه"، "ادفع"). عند رصدها يظهر تحذير أحمر للطالب ويُرسل إشعار لإدارة الحماية.
+          </p>
+        </div>
+
+        <!-- Clause 6: حماية الملكية والبيانات -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-purple-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-purple-50 text-emerald-600 flex items-center justify-center font-bold text-xl">
+            🔒
+          </div>
+          <h3 class="text-lg font-black text-[#1E1B4B]">6. خصوصية البيانات وبطاقات مهارات Tima</h3>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            بياناتك، بورتفوليوك، وسيرتك الذاتية وبطاقة Tima ملكك بالكامل. لا نقوم بمشاركة أي أرقام هواتف أو وسائل تواصل شخصية دون موافقتك الصريحة عند التقدم لفرص العمل أو حجز جلسات التوجيه.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Quick Agreement Acceptance Box -->
+      <div class="p-6 rounded-3xl bg-purple-50 border border-purple-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h4 class="font-black text-[#1E1B4B] text-base">هل أنت مستعد للانضمام لمجتمع إعلامي نزيه؟</h4>
+          <p class="text-xs text-slate-600">الموافقة على هذه الشروط إجبارية عند التسجيل كطالب أو منتور أو مؤسسة.</p>
+        </div>
+        <button onclick="window.phiApp.startOnboarding()" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-xs shadow-md shrink-0">
+          الموافقة والتسجيل في المنظومة 🚀
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ========================================================
+       ROLE SIGNUP MODAL (Per Role Inputs + Privacy Checkbox)
+       ======================================================== -->
+  <div id="modal-role-signup" class="fixed inset-0 z-50 bg-[#1E1B4B]/80 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-purple-100 max-h-[92vh] overflow-y-auto my-auto">
+      
+      <!-- Purple Header -->
+      <div class="bg-[#7C3AED] text-white p-6 relative">
+        <button onclick="window.phiApp.closeRoleSignup()" class="absolute top-4 left-4 text-purple-200 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <h3 id="role-signup-modal-title" class="text-lg font-black">انضمام للمنظومة الإعلامية</h3>
+        <p id="role-signup-modal-desc" class="text-xs text-purple-200 mt-1">بياناتك وهويتك ملكك في φ To Media.</p>
+      </div>
+
+      <!-- Form Body -->
+      <div class="p-6 space-y-4">
+        <div id="role-signup-form-body">
+          <!-- Dynamically filled based on role -->
+        </div>
+
+        <!-- Final section with checkbox and submit button -->
+        <div id="final-section-checkbox-submit" class="final-section-checkbox-submit space-y-4" style="margin-bottom: 120px; position: relative; z-index: 10;">
+          <!-- Privacy Checkbox (Mandatory) -->
+          <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-purple-50 border border-purple-200">
+            <input type="checkbox" id="role-privacy-check" onchange="window.phiApp.validateRoleSignupForm()" class="mt-1 w-4 h-4 accent-[#7C3AED] cursor-pointer">
+            <label for="role-privacy-check" class="text-xs text-slate-700 leading-relaxed cursor-pointer font-medium">
+              أوافق على الشروط و<a href="#privacy" onclick="window.phiApp.navigateView('privacy'); window.phiApp.closeRoleSignup();" class="text-[#7C3AED] font-bold underline hover:text-[#EC4899]">وثيقة الأمان والخصوصية ومكافحة النصب والاحتيال</a> - <span class="text-[#7C3AED] font-bold">بياناتك وهويتك ملكك</span>
+            </label>
+          </div>
+
+          <!-- Submit Button: Gradient Purple->Pink -->
+          <button onclick="window.phiApp.submitRoleSignup()" id="btn-submit-role-signup" disabled class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+            <span>تأكيد الانضمام والدخول للمنصة</span>
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       BOOKING MODAL (Day, Hour, Question, Fake Payment)
+       ======================================================== -->
+  <div id="modal-booking-session" class="fixed inset-0 z-50 bg-[#1E1B4B]/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-purple-100">
+      
+      <div class="bg-[#1E1B4B] text-white p-6 relative">
+        <button onclick="window.phiApp.closeBookingModal()" class="absolute top-4 left-4 text-purple-300 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <span class="text-[10px] font-bold text-pink-300 uppercase tracking-wider">حجز سيشن توجيه 1-on-1</span>
+        <h3 id="booking-mentor-name" class="text-lg font-black text-white mt-1">أحمد</h3>
+        <p id="booking-mentor-spec" class="text-xs text-purple-200">مونتاج بريمير ودافنشي</p>
+
+        <!-- Red Report Button on Booking Modal Header -->
+        <div class="mt-2.5 pt-2 border-t border-purple-800/60 flex items-center justify-between">
+          <button id="booking-report-btn" onclick="window.phiApp.openReportForBookingMentor()" class="text-[11px] font-bold text-rose-300 hover:text-white flex items-center gap-1 hover:underline">
+            <span>🚩 إبلاغ عن نصب / حساب وهمي</span>
+          </button>
+          <span class="text-[10px] text-purple-300">محمي بضمان φ To Media</span>
+        </div>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <!-- Mentor Info Card -->
+        <div class="flex items-center gap-3 p-3 rounded-2xl bg-purple-50 border border-purple-200">
+          <img id="booking-mentor-avatar" src="" alt="" class="w-12 h-12 rounded-xl object-cover border border-purple-300">
+          <div class="flex-1">
+            <span id="booking-mentor-work" class="text-xs font-bold text-[#1E1B4B] block">مونتير في الجزيرة</span>
+            <span id="booking-mentor-price" class="text-xs font-mono font-black text-[#EC4899]">200 ج.م / السيشن</span>
+          </div>
+        </div>
+
+        <!-- Choice 1: Day -->
+        <div>
+          <label class="block text-xs font-bold text-[#1E1B4B] mb-1">اختيار اليوم المفضل</label>
+          <select id="booking-day-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
+            <option value="غداً الثلاثاء">غداً الثلاثاء</option>
+            <option value="الأربعاء">الأربعاء القادم</option>
+            <option value="الخميس">الخميس القادم</option>
+            <option value="السبت">السبت القادم</option>
+          </select>
+        </div>
+
+        <!-- Choice 2: Hour -->
+        <div>
+          <label class="block text-xs font-bold text-[#1E1B4B] mb-1">اختيار الساعة</label>
+          <select id="booking-time-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none font-mono">
+            <option value="5:00 مساءً">5:00 مساءً - 6:00 مساءً</option>
+            <option value="7:00 مساءً" selected>7:00 مساءً - 8:00 مساءً</option>
+            <option value="9:00 مساءً">9:00 مساءً - 10:00 مساءً</option>
+          </select>
+        </div>
+
+        <!-- Choice 3: Question -->
+        <div>
+          <label class="block text-xs font-bold text-[#1E1B4B] mb-1">سؤالك أو محور السيشن *</label>
+          <textarea id="booking-question-input" rows="2" placeholder="اكتب ما تود مراجعته مع الخبير (سيرتك الذاتية، نقد عمل، نصيحة مهنية)..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">مراجعة الـ Showreel والمونتاج السينمائي لفيلم التخرج القصير.</textarea>
+        </div>
+
+        <!-- Fake Payment Info -->
+        <div class="p-3 rounded-2xl bg-pink-50/60 border border-pink-200 text-xs flex items-center justify-between">
+          <div>
+            <span class="font-bold text-[#1E1B4B] block">الدفع الإلكتروني (محاكاة تجريبية)</span>
+            <span class="text-[11px] text-slate-500">فودافون كاش / بطاقة بنكية (وهمي)</span>
+          </div>
+          <span class="text-xs font-bold text-emerald-600 bg-emerald-100 px-2.5 py-1 rounded-lg">جاهز للدفع</span>
+        </div>
+
+        <button onclick="window.phiApp.confirmBookingSession()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-md transition-all">
+          تأكيد الحجز والدخول المباشر لغرفة الـ Meet 🚀
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       ROOM MODAL (Dark Blue Header, Google Meet Link Button Gradient)
+       ======================================================== -->
+  <div id="modal-mentor-room" class="fixed inset-0 z-50 bg-[#1E1B4B]/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-purple-200 p-6 relative">
+      <button onclick="window.phiApp.closeMentorRoom()" class="absolute top-5 left-5 p-2 rounded-full bg-purple-100 hover:bg-purple-200 text-[#1E1B4B]">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div id="room-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       PORTFOLIO ADD WORK MODAL (2 TABS: VIA LINK / DIRECT FILE UPLOAD)
+       ======================================================== -->
+  <div id="modal-add-portfolio-work" class="fixed inset-0 z-50 bg-[#1E1B4B]/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-purple-100 flex flex-col max-h-[90vh]">
+      
+      <!-- Purple Header -->
+      <div class="bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white p-5 relative">
+        <button onclick="window.phiApp.closeAddWorkModal()" class="absolute top-4 left-4 text-purple-100 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <span class="text-[10px] font-black uppercase tracking-wider text-pink-200">PORTFOLIO WORK BUILDER</span>
+        <h3 class="text-lg font-black text-white mt-0.5">إضافة عمل إعلامي جديد للبورتفوليو</h3>
+        <p class="text-xs text-purple-100">ارفع أعمالك الميدانية باللينك أو كملف مباشر لتوثيق خبراتك (+15 نقطة Tima).</p>
+      </div>
+
+      <!-- Scrollable Form Body -->
+      <div class="p-6 overflow-y-auto" id="add-work-modal-body">
+        <!-- Rendered dynamically via renderAddWorkModal() -->
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       PORTFOLIO WORK DETAIL MODAL (Embed / Audio / Video / PDF)
+       ======================================================== -->
+  <div id="modal-view-portfolio-detail" class="fixed inset-0 z-50 bg-[#1E1B4B]/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-purple-200 p-6 relative">
+      <button onclick="window.phiApp.closePortfolioDetailModal()" class="absolute top-5 left-5 p-2 rounded-full bg-purple-100 hover:bg-purple-200 text-[#1E1B4B] transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div id="portfolio-detail-modal-body">
+        <!-- Rendered dynamically via renderPortfolioDetailModal() -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       ANTI-SCAM REPORT MODAL (🚩 إبلاغ عن نصب / حساب وهمي)
+       ======================================================== -->
+  <div id="modal-report-account" class="fixed inset-0 z-50 bg-[#1E1B4B]/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-rose-100 flex flex-col max-h-[92vh]">
+      
+      <!-- Red Header -->
+      <div class="bg-gradient-to-r from-rose-600 via-rose-700 to-[#1E1B4B] text-white p-5 relative">
+        <button onclick="window.phiApp.closeReportModal()" class="absolute top-4 left-4 text-rose-200 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <span class="text-[10px] font-black uppercase tracking-wider text-rose-200 flex items-center gap-1.5">
+          <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+          <span>منظومة مكافحة الاحتيال والحسابات الوهمية</span>
+        </span>
+        <h3 class="text-lg font-black text-white mt-1 flex items-center gap-2">
+          <span>🚩 إبلاغ عن نصب / حساب وهمي</span>
+        </h3>
+        <p class="text-xs text-rose-100 mt-0.5">3 بلاغات تؤدي إلى التجميد التلقائي الفوري للحساب وحظره من كافة القوائم.</p>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-4">
+        
+        <!-- Target Info Box -->
+        <div class="p-3.5 rounded-2xl bg-rose-50/70 border border-rose-200 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] text-rose-600 font-bold block">الحساب المُبلّغ عنه:</span>
+            <h4 id="report-target-name" class="text-sm font-black text-[#1E1B4B]">أحمد كمال الدين</h4>
+            <span id="report-target-type" class="text-[10px] text-slate-500 font-medium">خبير إعلامي</span>
+            <input type="hidden" id="report-target-id" value="">
+          </div>
+          <span class="px-2.5 py-1 rounded-lg bg-rose-100 text-rose-700 font-black text-xs font-mono">
+            محل بلاغ ⚠️
+          </span>
+        </div>
+
+        <!-- Reason Choice -->
+        <div>
+          <label class="block text-xs font-bold text-[#1E1B4B] mb-1.5">سبب البلاغ *</label>
+          <select id="report-reason-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs font-bold outline-none focus:border-rose-500 text-[#1E1B4B]">
+            <option value="حساب وهمي">حساب وهمي (Fake Account / انتحال صفة)</option>
+            <option value="يطلب فلوس">يطلب فلوس (طلب تحويلات خارجية أو فودافون كاش)</option>
+            <option value="كورس مدفوع">كورس مدفوع (ترويج لكورسات خارجية أو بيع شهادات)</option>
+            <option value="تحرش">تحرش أو إساءة سلوكية</option>
+            <option value="بيانات كاذبة">بيانات كاذبة (تزييف خبرة / سيرة ذاتية مفبركة)</option>
+          </select>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-xs font-bold text-[#1E1B4B] mb-1.5">وصف الواقعة وتفاصيل البلاغ *</label>
+          <textarea id="report-description-input" rows="3" placeholder="اشرح ما حدث بدقة (طلب تحويل فلوس، إرسال رابط مشبوه، وعود بكورسات مدفوعة، محادثات خاصة غير لائقة)..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-rose-500"></textarea>
+        </div>
+
+        <!-- Screenshot Upload -->
+        <div>
+          <label class="block text-xs font-bold text-[#1E1B4B] mb-1.5">رفع سكرين شوت كإثبات (Screenshot Upload)</label>
+          <div class="border-2 border-dashed border-rose-200 hover:border-rose-400 rounded-2xl p-4 text-center bg-rose-50/30 transition-colors relative">
+            <input type="file" id="report-screenshot-input" accept="image/*" onchange="window.phiApp.handleReportScreenshotUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+            
+            <div id="report-screenshot-placeholder" class="flex flex-col items-center justify-center gap-1.5 text-xs text-slate-500 pointer-events-none">
+              <i data-lucide="image-plus" class="w-6 h-6 text-rose-500"></i>
+              <span class="font-bold text-[#1E1B4B]">انقر هنا لرفع صورة سكرين شوت للمحادثة أو المخالفة</span>
+              <span class="text-[10px] text-slate-400">يدعم PNG و JPG حتى 10MB</span>
+            </div>
+
+            <div id="report-screenshot-preview-box" class="hidden">
+              <img id="report-screenshot-preview" src="" alt="Screenshot" class="max-h-36 mx-auto rounded-xl object-contain border border-rose-200 shadow-sm">
+              <button type="button" onclick="window.phiApp.removeReportScreenshot()" class="mt-2 text-[11px] text-rose-600 font-bold hover:underline">
+                ✕ إزالة الصورة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warning / Disclaimer -->
+        <div class="p-3 rounded-2xl bg-amber-50 border border-amber-200 text-[11px] text-amber-800 leading-relaxed">
+          💡 البلاغات الكيدية تخضع للمراجعة، والبلاغات الحقيقية تسهم في الحفاظ على أمان مجتمع طلاب وصناع الإعلام.
+        </div>
+
+        <!-- Submit Button -->
+        <button onclick="window.phiApp.submitReport()" id="btn-submit-report" class="w-full py-3.5 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-black text-sm shadow-lg shadow-rose-600/30 transition-all flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>إرسال البلاغ وتطبيق إجراءات الحظر 🚫</span>
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       DOCUMENT / IMAGE PREVIEW LIGHTBOX MODAL
+       ======================================================== -->
+  <div id="modal-image-preview" class="fixed inset-0 z-50 bg-[#1E1B4B]/95 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-purple-200 relative p-5">
+      <button onclick="window.phiApp.closeImagePreviewModal()" class="absolute top-4 left-4 p-2 rounded-full bg-purple-100 hover:bg-purple-200 text-[#1E1B4B] transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <h4 id="image-preview-title" class="text-sm font-black text-[#1E1B4B] mb-3">معاينة المستند الثبوتي</h4>
+      <div class="bg-slate-900 rounded-2xl p-2 flex items-center justify-center max-h-[70vh] overflow-hidden">
+        <img id="image-preview-img" src="" alt="Document Preview" class="max-h-[68vh] w-auto object-contain rounded-xl">
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       MOBILE BOTTOM NAV (Dark Blue #1E1B4B, Active Tab Pink #EC4899)
+       ======================================================== -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#1E1B4B] border-t border-purple-900/60 px-2 py-2 flex items-center justify-around text-xs shadow-2xl">
+    <button onclick="window.phiApp.navigateView('student-app'); window.phiApp.setStudentTab('builder');" id="student-bottom-nav-builder" class="flex flex-col items-center justify-center gap-1 text-[#EC4899] font-black transition-all">
+      <i data-lucide="sparkles" class="w-5 h-5"></i>
+      <span class="text-[10px]">بنائي</span>
+    </button>
+    <button onclick="window.phiApp.navigateView('student-app'); window.phiApp.setStudentTab('tima');" id="student-bottom-nav-tima" class="flex flex-col items-center justify-center gap-1 text-purple-200 hover:text-white transition-all">
+      <i data-lucide="award" class="w-5 h-5"></i>
+      <span class="text-[10px]">بطاقات Tima</span>
+    </button>
+    <button onclick="window.phiApp.navigateView('student-app'); window.phiApp.setStudentTab('lab')" id="student-bottom-nav-lab" class="flex flex-col items-center justify-center gap-1 text-purple-200 hover:text-white transition-all">
+      <i data-lucide="flask-conical" class="w-5 h-5"></i>
+      <span class="text-[10px]">المعمل</span>
+    </button>
+    <button onclick="window.phiApp.navigateView('student-app'); window.phiApp.setStudentTab('mentors')" id="student-bottom-nav-mentors" class="flex flex-col items-center justify-center gap-1 text-purple-200 hover:text-white transition-all">
+      <i data-lucide="users" class="w-5 h-5"></i>
+      <span class="text-[10px]">المنتورز</span>
+    </button>
+    <button onclick="window.phiApp.navigateView('student-app'); window.phiApp.setStudentTab('about')" id="student-bottom-nav-about" class="flex flex-col items-center justify-center gap-1 text-purple-200 hover:text-white transition-all">
+      <i data-lucide="help-circle" class="w-5 h-5"></i>
+      <span class="text-[10px]">حول φ</span>
+    </button>
+  </nav>
+
+  <!-- App Main Module -->
+  <script type="module">
+    import { initApp, setupGlobalFunctions } from '/app-logic.js';
+    
+    // Bind functions immediately
+    setupGlobalFunctions();
+
+    // Run initApp directly if DOM is already loaded or attach listener
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initApp();
+      });
+    } else {
+      initApp();
+    }
+  </script>
+
+</body>
+</html>
