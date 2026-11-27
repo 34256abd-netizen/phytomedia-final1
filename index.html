@@ -6,6 +6,16 @@
   <title>φ To Media | الإعلام مش هواية. الإعلام هوية</title>
   <meta name="description" content="منظومة φ To Media المتكاملة لطلاب وخريجي كليات الإعلام، الخبراء والمنتورز، والمؤسسات الإعلامية في مصر. بطاقات Tima، بورتفوليو احترافي، ومعمل التحديات.">
   <meta name="theme-color" content="#1E1B4B">
+  <link rel="canonical" href="https://phytomedia-final2.phytomedia10.workers.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="φ To Media">
+  <meta property="og:title" content="φ To Media | الإعلام مش هواية. الإعلام هوية">
+  <meta property="og:description" content="منظومة لطلاب وخريجي كليات الإعلام والمنتورز والمؤسسات: بطاقات Tima وCV وجلسات 1-on-1.">
+  <meta property="og:url" content="https://phytomedia-final2.phytomedia10.workers.dev/">
+  <meta property="og:image" content="https://phytomedia-final2.phytomedia10.workers.dev/og-image.svg">
+  <meta property="og:locale" content="ar_EG">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://phytomedia-final2.phytomedia10.workers.dev/og-image.svg">
 
   <!-- Favicon / App Icon with φ Symbol -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%237C3AED'/><stop offset='100%25' stop-color='%23EC4899'/></linearGradient></defs><text x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Cairo, sans-serif' font-weight='900' font-size='68' fill='white'>φ</text></svg>">
@@ -178,16 +188,16 @@
   </style>
 
   <!-- html-to-image CDN (Crisp Arabic ligature rendering for RTL card capture) -->
-  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
 
   <!-- jsPDF CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <!-- html2canvas CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <!-- html2pdf.js CDN (Direct automatic PDF download to disk) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -394,7 +404,7 @@
           <i data-lucide="help-circle" class="w-3.5 h-3.5 text-purple-300"></i>
           <span>حول φ To Media</span>
         </button>
-        <button id="nav-admin-btn" onclick="window.phiApp.checkAdminAccess()" class="inline-flex px-3 py-1.5 rounded-xl font-black text-amber-300 hover:text-white bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 transition-all items-center gap-1.5 shadow-sm cursor-pointer">
+        <button id="nav-admin-btn" onclick="window.phiApp.checkAdminAccess()" class="hidden px-3 py-1.5 rounded-xl font-black text-amber-300 hover:text-white bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 transition-all items-center gap-1.5 shadow-sm cursor-pointer">
           <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-amber-400"></i>
           <span>لوحة الإدارة ⚙️</span>
         </button>
@@ -418,7 +428,7 @@
               φ
             </div>
             <div class="flex flex-col text-right">
-              <span id="nav-username" class="font-bold text-xs leading-none">مريم حسام</span>
+              <span id="nav-username" class="font-bold text-xs leading-none">اسمك هنا</span>
               <span id="nav-user-role-badge" class="text-[10px] text-pink-300 font-semibold mt-0.5">طالب إعلام</span>
             </div>
           </div>
@@ -613,7 +623,7 @@
       </div>
 
       <!-- Admin Portal Quick Entry Banner -->
-      <div class="mt-10 text-center">
+      <div class="mt-10 text-center hidden" aria-hidden="true">
         <button onclick="window.phiApp.openAdminLockModal()" class="px-7 py-3.5 rounded-2xl bg-[#1E1B4B] hover:bg-[#2E1065] text-amber-300 border border-amber-400/40 font-bold text-xs sm:text-sm shadow-xl transition-all inline-flex items-center gap-2 cursor-pointer hover:scale-105">
           <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400"></i>
           <span>تسجيل دخول إدارة المنظومة (Super Admin) ⚙️</span>
@@ -940,7 +950,7 @@
 
                 <!-- Student Name & Theme Name Tag -->
                 <div class="text-center my-1 relative z-10">
-                  <h3 id="tima-card-name" class="card-name text-xl font-black text-white tracking-wide">مريم حسام شريف</h3>
+                  <h3 id="tima-card-name" class="card-name text-xl font-black text-white tracking-wide">اسمك هنا</h3>
                   <div class="flex items-center justify-center gap-2 mt-0.5">
                     <span class="text-xs font-semibold text-purple-200">كلية الإعلام - دفعة 2025</span>
                     <span class="text-slate-400">•</span>
