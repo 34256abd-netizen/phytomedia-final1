@@ -367,12 +367,23 @@ export function saveToStorage() {
 }
 
 // Navigation
+const VIEW_TITLES = {
+  'landing': 'φ To Media | الإعلام مش هواية. الإعلام هوية',
+  'role-select': 'اختر هويتك الإعلامية | φ To Media',
+  'student-app': 'بوابة الطلاب | φ To Media',
+  'mentor-app': 'بوابة المنتورز | φ To Media',
+  'company-app': 'بوابة المؤسسات | φ To Media',
+  'admin-app': 'لوحة التحكم | φ To Media',
+  'privacy': 'سياسة الخصوصية | φ To Media'
+};
+const STUDENT_TAB_TITLES = { 'builder': 'بنائي', 'tima': 'بطاقات Tima', 'lab': 'المعمل', 'mentors': 'المنتورز', 'about': 'حول φ' };
 export function navigateView(viewName) {
   if (viewName === 'admin-app' && !isAdminAuthenticated()) {
     openAdminLockModal();
     return;
   }
   state.currentView = viewName;
+  document.title = VIEW_TITLES[viewName] || VIEW_TITLES['landing'];
   if (viewName !== 'admin-app' && window.location.hash === '#admin') {
     window.location.hash = '';
   }
@@ -385,6 +396,7 @@ export function navigateView(viewName) {
 
 export function setStudentTab(tabName) {
   state.studentActiveTab = tabName;
+  document.title = (STUDENT_TAB_TITLES[tabName] ? STUDENT_TAB_TITLES[tabName] + ' | ' : '') + VIEW_TITLES['student-app'];
   renderApp();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1832,7 +1844,7 @@ export function openMentorRoom(mentorId, bookingData = null) {
       <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
         <div class="flex items-center gap-4">
           <div class="relative w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-[#EC4899]">
-            <img src="${mentor.image}" alt="${mentor.name}" class="w-full h-full object-cover">
+            <img loading="lazy" decoding="async" src="${mentor.image}" alt="${mentor.name}" class="w-full h-full object-cover">
             <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-[#1E1B4B]"></span>
           </div>
           <div>
@@ -2797,7 +2809,7 @@ function renderMentorsList() {
         <!-- Top row: Avatar, status badge, verified badge and specialized badge -->
         <div class="flex items-start justify-between gap-4 mb-4">
           <div class="relative w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-purple-200">
-            <img src="${m.image}" alt="${m.name}" class="w-full h-full object-cover">
+            <img loading="lazy" decoding="async" src="${m.image}" alt="${m.name}" class="w-full h-full object-cover">
           </div>
           <div class="flex flex-col items-end gap-1.5">
             <span class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-purple-100 text-[#7C3AED] border border-purple-300 flex items-center gap-1 shadow-sm">
@@ -3214,7 +3226,7 @@ function renderTalentPool() {
       <div>
         <div class="flex items-start justify-between gap-4 mb-3">
           <div class="flex items-center gap-3">
-            <img src="${s.avatar}" alt="${s.name}" class="w-14 h-14 rounded-2xl object-cover border-2 border-purple-200">
+            <img loading="lazy" decoding="async" src="${s.avatar}" alt="${s.name}" class="w-14 h-14 rounded-2xl object-cover border-2 border-purple-200">
             <div>
               <h4 class="font-black text-base text-[#1E1B4B] group-hover:text-[#7C3AED] transition-colors">${s.name}</h4>
               <p class="text-xs text-[#EC4899] font-bold">${s.position}</p>
@@ -3586,7 +3598,7 @@ export function renderPhiScoutResults(results) {
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div class="flex items-center gap-3.5">
             <div class="relative">
-              <img src="${student.avatar}" alt="${student.name}" class="w-14 h-14 rounded-2xl object-cover border-2 border-pink-400/40">
+              <img loading="lazy" decoding="async" src="${student.avatar}" alt="${student.name}" class="w-14 h-14 rounded-2xl object-cover border-2 border-pink-400/40">
               <span class="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-[11px] font-black flex items-center justify-center border border-white text-white shadow">
                 #${idx + 1}
               </span>
@@ -3991,7 +4003,7 @@ export function renderAdminStudentsTable() {
         <!-- Student Info -->
         <td class="p-4">
           <div class="flex items-center gap-3">
-            <img src="${avatar}" alt="${s.name}" class="w-10 h-10 rounded-2xl object-cover border border-purple-200 shrink-0">
+            <img loading="lazy" decoding="async" src="${avatar}" alt="${s.name}" class="w-10 h-10 rounded-2xl object-cover border border-purple-200 shrink-0">
             <div>
               <div class="font-black text-[#1E1B4B] text-sm">${s.name}</div>
               <div class="text-[11px] font-mono text-[#7C3AED]">${s.email || 'student@phitomedia.eg'}</div>
@@ -4254,7 +4266,7 @@ export function renderAdminPortfolioTable() {
     // Thumbnail / Icon
     const isVideo = item.type === 'فيديو';
     const thumbHtml = item.fileUrl && (item.fileUrl.startsWith('data:image/') || item.fileUrl.includes('unsplash.com') || item.fileUrl.endsWith('.png') || item.fileUrl.endsWith('.jpg'))
-      ? `<img src="${item.fileUrl}" alt="" class="w-12 h-12 rounded-xl object-cover border border-purple-200 shrink-0">`
+      ? `<img loading="lazy" decoding="async" src="${item.fileUrl}" alt="" class="w-12 h-12 rounded-xl object-cover border border-purple-200 shrink-0">`
       : `<div class="w-12 h-12 rounded-xl bg-purple-100 text-[#7C3AED] flex items-center justify-center font-bold text-lg shrink-0">
           <i data-lucide="${isVideo ? 'video' : item.type === 'مقال' || item.type === 'تحقيق' ? 'file-text' : 'sparkles'}" class="w-5 h-5"></i>
          </div>`;
