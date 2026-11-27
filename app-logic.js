@@ -2669,14 +2669,16 @@ function updateNavUserStatus() {
   const adminNavBtn = document.getElementById('nav-admin-btn');
   const adminMobileBtn = document.getElementById('mobile-bottom-nav-admin');
 
+  const showAdminEntry = isAdminAuthenticated() || (state.currentUser && state.currentUser.role === 'admin');
+
   if (adminNavBtn) {
-    adminNavBtn.classList.remove('hidden');
-    adminNavBtn.classList.add('inline-flex');
+    adminNavBtn.classList.toggle('hidden', !showAdminEntry);
+    adminNavBtn.classList.toggle('inline-flex', !!showAdminEntry);
   }
 
   if (adminMobileBtn) {
-    adminMobileBtn.classList.remove('hidden');
-    adminMobileBtn.classList.add('flex');
+    adminMobileBtn.classList.toggle('hidden', !showAdminEntry);
+    adminMobileBtn.classList.toggle('flex', !!showAdminEntry);
   }
 
   if (state.currentUser) {
