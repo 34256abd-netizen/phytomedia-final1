@@ -1610,7 +1610,7 @@ export async function downloadTimaCard() {
     return;
   }
 
-  const userName = (state.currentUser?.name || state.timaCard.name || 'مريم حسام شريف').trim();
+  const userName = (state.currentUser?.name || state.timaCard.name || 'طالب φ To Media').trim();
   const cleanFileName = `Tima-Card-${userName.replace(/\s+/g, '-')}.png`;
 
   // Provide visual feedback
@@ -1987,7 +1987,7 @@ export function sendRoomMessage(mentorId) {
   const text = input.value.trim();
   if (!text) return;
 
-  const userName = state.currentUser?.name || state.timaCard.name || 'مريم حسام شريف';
+  const userName = state.currentUser?.name || state.timaCard.name || 'طالب φ To Media';
   
   if (!state.roomMessages[mentorId]) {
     state.roomMessages[mentorId] = [];
@@ -2415,7 +2415,7 @@ export async function submitLabWork() {
     }
 
     // Save submission
-    const studentName = state.currentUser?.name || state.timaCard.name || 'مريم حسام شريف';
+    const studentName = state.currentUser?.name || state.timaCard.name || 'طالب φ To Media';
     const newSub = {
       id: `sub-${Date.now()}`,
       studentName,
@@ -4257,7 +4257,7 @@ export function renderAdminPortfolioTable() {
           <i data-lucide="${isVideo ? 'video' : item.type === 'مقال' || item.type === 'تحقيق' ? 'file-text' : 'sparkles'}" class="w-5 h-5"></i>
          </div>`;
 
-    const studentName = item.studentName || state.currentUser?.name || 'مريم حسام شريف';
+    const studentName = item.studentName || state.currentUser?.name || 'طالب φ To Media';
 
     return `
       <tr class="border-b border-purple-50 hover:bg-purple-50/40 transition-colors">
@@ -5041,7 +5041,7 @@ export function submitMentorRating() {
     mentor.reviewsList = getSeedReviewsForMentor(mentor.id);
   }
 
-  const studentName = state.currentUser?.name || state.timaCard.name || 'مريم حسام شريف';
+  const studentName = state.currentUser?.name || state.timaCard.name || 'طالب φ To Media';
 
   const newReview = {
     id: `rev-${Date.now()}`,
