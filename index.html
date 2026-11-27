@@ -29,29 +29,8 @@
   <meta name="twitter:title" content="φ To Media | الإعلام مش هواية. الإعلام هوية">
   <meta name="twitter:description" content="منظومة φ To Media المتكاملة لطلاب وخريجي كليات الإعلام">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            phi: {
-              purple: '#7C3AED',
-              pink: '#EC4899',
-              darkBlue: '#1E1B4B',
-              lightBg: '#F5F3FF',
-              lightPurple: '#EDE9FE'
-            }
-          },
-          fontFamily: {
-            cairo: ['Cairo', 'sans-serif'],
-            inter: ['Inter', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
+  <!-- Tailwind CSS: compiled at build time into public/spa.css (replaces the cdn.tailwindcss.com runtime script) -->
+  <link rel="stylesheet" href="/spa.css">
 
   <!-- Google Fonts: Cairo, Amiri, Tajawal, Inter, Aref Ruqaa, Space Grotesk & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -200,7 +179,7 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@1.82.0"></script>
 
   <!-- Early Safe window.phiApp proxy to guarantee phiApp is NEVER undefined at any click time -->
   <script>
@@ -483,7 +462,7 @@
           </h1>
 
           <p class="max-w-2xl mx-auto text-base sm:text-xl text-purple-200 leading-relaxed mb-10 font-normal">
-            المنظومة الإعلامية الأولى في مصر التي تجمع بين الطلاب والمنتورز والمؤسسات في بيئة احترافية واحدة مع بطاقات مهارات Tima المقيمة بالذكاء الاصطناعي.
+            منظومة إعلامية متكاملة تجمع بين الطلاب والمنتورز والمؤسسات في بيئة احترافية واحدة مع بطاقات مهارات Tima المقيمة بالذكاء الاصطناعي.
           </p>
 
           <!-- CTA Button: "ابدأ بناء عالمك الإعلامي" -> Gradient Purple to Pink, White Text, Rounded-Full, Shadow -->
@@ -516,7 +495,7 @@
               </div>
               <h3 class="text-lg font-black text-[#1E1B4B] mb-2">نظام الخبراء المتخصصين</h3>
               <p class="text-xs text-slate-600 leading-relaxed">
-                حجز جلسات توجيه مباشرة 1-on-1 مع كبار مونتيري الجزيرة وصحفيي المصري اليوم مع غرف Meet فورية.
+                حجز جلسات توجيه مباشرة 1-on-1 مع نخبة من المونتيرين والصحفيين المحترفين، مع غرف Meet فورية.
               </p>
             </div>
 
@@ -1698,7 +1677,7 @@
                   خبير معتمد
                 </span>
               </div>
-              <p id="mentor-dash-specialty" class="text-xs text-purple-200 mt-1">تخصص: مونتاج بريمير ودافنشي • مونتير في الجزيرة</p>
+              <p id="mentor-dash-specialty" class="text-xs text-purple-200 mt-1">تخصص: مونتاج بريمير ودافنشي • مونتير محترف</p>
             </div>
           </div>
 
@@ -1988,9 +1967,9 @@
             </span>
             <span class="text-xs text-purple-200 font-mono">v2026.1 Official</span>
           </div>
-          <h1 class="text-3xl sm:text-4xl font-black text-white leading-tight">
+          <h2 class="text-3xl sm:text-4xl font-black text-white leading-tight">
             وثيقة الشروط والأمان ومكافحة الاحتيال والحسابات الوهمية
-          </h1>
+          </h2>
           <p class="text-sm sm:text-base text-purple-200 mt-2 max-w-3xl leading-relaxed">
             في منصة <span class="font-bold text-white">φ To Media</span>، حماية الطلاب وخريجي كليات الإعلام وصناع المحتوى خط أحمر. هذه الوثيقة توضح سياساتنا الصارمة لضمان بيئة آمنة وخالية من النصب والحسابات المزيفة.
           </p>
@@ -2936,7 +2915,7 @@
         <div class="flex items-center gap-3 p-3 rounded-2xl bg-purple-50 border border-purple-200">
           <img id="booking-mentor-avatar" src="" alt="" class="w-12 h-12 rounded-xl object-cover border border-purple-300">
           <div class="flex-1">
-            <span id="booking-mentor-work" class="text-xs font-bold text-[#1E1B4B] block">مونتير في الجزيرة</span>
+            <span id="booking-mentor-work" class="text-xs font-bold text-[#1E1B4B] block">مونتير محترف</span>
             <span id="booking-mentor-price" class="text-xs font-mono font-black text-[#EC4899]">200 ج.م / السيشن</span>
           </div>
         </div>
