@@ -1,0 +1,387 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* CV Preview Section Styling & Strong Arabic Typography */
+#cv-preview-section {
+    direction: rtl !important;
+    text-align: right !important;
+    font-family: 'Cairo', 'Amiri', 'Tajawal', sans-serif !important;
+    letter-spacing: 0 !important;
+    word-spacing: normal !important;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+#cv-preview-section,
+#cv-preview-section * {
+    font-family: 'Cairo', 'Amiri', 'Tajawal', sans-serif !important;
+    letter-spacing: 0 !important;
+    word-spacing: normal !important;
+    font-feature-settings: "liga" 1, "calt" 1 !important;
+    text-rendering: optimizeLegibility !important;
+}
+
+:root {
+  --primary-purple: #7C3AED;
+  --purple-light: #EDE9FE;
+  --purple-text: #6D28D9;
+  --pink-accent: #EC4899;
+  --dark-blue: #1E1B4B;
+  --light-bg: #F5F3FF;
+  --gradient-main: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Cairo', 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #F5F3FF;
+  color: #1E1B4B;
+  min-height: calc(100vh + 100px);
+}
+
+body {
+  min-height: calc(100vh + 100px) !important;
+  background-color: #F5F3FF !important;
+  color: #1E1B4B;
+  overflow-x: hidden;
+  padding-bottom: 150px !important;
+}
+
+/* Fix overlap for preview testers */
+.final-section-checkbox-submit,
+#final-section-checkbox-submit,
+.final-signup-section {
+  margin-bottom: 120px !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EDE9FE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4B5FD;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7C3AED;
+}
+
+/* Purple-Pink Gradient Utilities */
+.bg-gradient-phi {
+  background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+}
+
+.text-gradient-phi {
+  background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gradient-phi {
+  border-image: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%) 1;
+}
+
+/* Glow Utilities */
+.glow-purple-pink {
+  box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.3), 0 8px 10px -6px rgba(236, 72, 153, 0.3);
+}
+
+.glow-purple-pink-sm {
+  box-shadow: 0 4px 12px -2px rgba(124, 58, 237, 0.25);
+}
+
+.glow-purple-pink-lg {
+  box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.4);
+}
+
+/* FIFA Card 3D Perspective & Styling */
+.fifa-card-container {
+  perspective: 1000px;
+}
+
+.fifa-card-wrapper {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.fifa-card-wrapper:hover {
+  transform: translateY(-6px) rotateY(4deg) scale(1.02);
+}
+
+/* Subtle Gradient Animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* Heart pop */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.animate-heart {
+  animation: heartPop 0.35s ease-in-out;
+}
+
+/* ==========================================================
+   INFINITE TIMA LEVELS (NO END) - EVOLUTION THEMES & ANIMATIONS
+   ========================================================== */
+
+/* 1. Fire Theme (Level 15-19) */
+@keyframes flamePulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.8)) drop-shadow(0 0 32px rgba(249, 115, 22, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 28px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 48px rgba(239, 68, 68, 0.8));
+  }
+}
+
+@keyframes flameFlicker {
+  0%, 100% { transform: scaleY(1); opacity: 0.92; }
+  25% { transform: scaleY(1.03) scaleX(0.99); opacity: 1; }
+  50% { transform: scaleY(0.97) scaleX(1.01); opacity: 0.88; }
+  75% { transform: scaleY(1.02); opacity: 0.96; }
+}
+
+.theme-fire {
+  background: linear-gradient(145deg, #7f1d1d 0%, #991b1b 35%, #450a0a 75%, #180505 100%) !important;
+  color: #fff !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.border-fire {
+  background: linear-gradient(135deg, #ef4444 0%, #f97316 30%, #f59e0b 60%, #dc2626 100%) !important;
+  animation: flamePulse 2s ease-in-out infinite;
+}
+
+/* 2. Emerald Theme (Level 20-24) */
+@keyframes lightningPulse {
+  0%, 100% {
+    box-shadow: 0 0 18px rgba(16, 185, 129, 0.7), 0 0 35px rgba(124, 58, 237, 0.45);
+    border-color: rgba(52, 211, 153, 0.8);
+  }
+  48% {
+    box-shadow: 0 0 22px rgba(16, 185, 129, 0.8), 0 0 40px rgba(124, 58, 237, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(255, 255, 255, 0.95), 0 0 65px rgba(16, 185, 129, 0.95), 0 0 75px rgba(124, 58, 237, 0.8);
+  }
+  52% {
+    box-shadow: 0 0 22px rgba(16, 185, 129, 0.8), 0 0 40px rgba(124, 58, 237, 0.55);
+  }
+}
+
+.theme-emerald {
+  background: linear-gradient(145deg, #064e3b 0%, #065f46 40%, #1e1b4b 85%, #0f172a 100%) !important;
+  color: #fff !important;
+}
+
+.border-emerald {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 30%, #8b5cf6 65%, #059669 100%) !important;
+  animation: lightningPulse 2.8s ease-in-out infinite;
+}
+
+/* 3. Cosmic Theme (Level 25-29) */
+.theme-cosmic {
+  background: #06040d !important;
+  position: relative;
+  color: #fff !important;
+}
+
+.border-cosmic {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 35%, #ec4899 70%, #3b82f6 100%) !important;
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.65), inset 0 0 25px rgba(99, 102, 241, 0.45);
+}
+
+/* 4. Rainbow Shifting Theme (Level 30-49) */
+@keyframes rainbowShift {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+.theme-rainbow {
+  background: linear-gradient(145deg, #1e1b4b 0%, #2e1065 45%, #172554 100%) !important;
+  color: #fff !important;
+}
+
+.border-rainbow {
+  background: linear-gradient(135deg, #ff007f 0%, #ff7f00 20%, #ffff00 40%, #00ff7f 60%, #007fff 80%, #7f00ff 100%) !important;
+  background-size: 300% 300% !important;
+  animation: rainbowShift 5s linear infinite, gradientShift 4s ease infinite;
+}
+
+/* 5. Holographic Theme (Level 50+) */
+@keyframes holoSheen {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+@keyframes chromaticAberration {
+  0%, 100% {
+    text-shadow: 2px 0 0 rgba(236, 72, 153, 0.75), -2px 0 0 rgba(6, 182, 212, 0.75);
+  }
+  50% {
+    text-shadow: -2px 0 0 rgba(236, 72, 153, 0.75), 2px 0 0 rgba(6, 182, 212, 0.75);
+  }
+}
+
+.theme-holographic {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(124, 58, 237, 0.22) 30%, rgba(236, 72, 153, 0.22) 70%, rgba(255, 255, 255, 0.1) 100%) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #fff !important;
+}
+
+.border-holographic {
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(236,72,153,0.85), rgba(6,182,212,0.85), rgba(168,85,247,0.85), rgba(255,255,255,0.9)) !important;
+  background-size: 250% 250% !important;
+  animation: holoSheen 4.5s ease infinite;
+  box-shadow: 0 0 35px rgba(236, 72, 153, 0.55), 0 0 60px rgba(6, 182, 212, 0.45);
+}
+
+.chromatic-text {
+  animation: chromaticAberration 2s infinite ease-in-out;
+}
+
+/* Custom Themes for Level 100+ */
+.theme-cyber {
+  background: linear-gradient(145deg, #09090b 0%, #1e1b4b 60%, #030712 100%) !important;
+  color: #fff !important;
+}
+
+.border-cyber {
+  background: linear-gradient(135deg, #06b6d4 0%, #ec4899 50%, #3b82f6 100%) !important;
+  box-shadow: 0 0 35px rgba(6, 182, 212, 0.65), 0 0 50px rgba(236, 72, 153, 0.55);
+}
+
+.theme-mythic {
+  background: linear-gradient(145deg, #1c1917 0%, #2e1065 50%, #0f172a 100%) !important;
+  color: #fff !important;
+}
+
+.border-mythic {
+  background: linear-gradient(135deg, #f59e0b 0%, #ec4899 40%, #7c3aed 80%, #fbbf24 100%) !important;
+  box-shadow: 0 0 40px rgba(245, 158, 11, 0.7), 0 0 60px rgba(124, 58, 237, 0.6);
+}
+
+/* Stars Canvas styling */
+#tima-stars-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================
+   PRINT / SAVE AS PDF STYLESHEET (Clean Native Vector PDF)
+   ========================================================== */
+@media print {
+  /* Force full background colors and graphic rendering in PDF */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  /* Hide all UI elements, top banners, navigation headers, footers, buttons */
+  body {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  header,
+  footer,
+  nav,
+  button,
+  .no-print,
+  #react-cv-download-slot,
+  .top-banner,
+  #modal-add-portfolio-work,
+  #modal-booking-session,
+  #modal-report-account {
+    display: none !important;
+  }
+
+  /* Hide non-CV views */
+  #cv-step-form-container,
+  #cv-step-indicators-container,
+  #cv-tab-content-form,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Show ONLY #cv-preview-section and #cv-printable-document */
+  #cv-preview-section,
+  #cv-preview-section *,
+  #cv-printable-document,
+  #cv-printable-document * {
+    visibility: visible !important;
+  }
+
+  #cv-preview-section,
+  #cv-printable-document {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #ffffff !important;
+  }
+
+  /* Ensure background colors stay dark blue #1E1B4B */
+  #cv-preview-section .bg-\[\#1E1B4B\],
+  #cv-printable-document .bg-\[\#1E1B4B\] {
+    background-color: #1E1B4B !important;
+    color: #ffffff !important;
+  }
+
+  /* Avoid page breaks inside sections */
+  section,
+  .p-3,
+  .p-3\.5,
+  .p-6,
+  .p-8,
+  h1, h2, h3, h4 {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+
