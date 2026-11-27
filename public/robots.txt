@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Sitemap: https://phytomedia-final2.phytomedia10.workers.dev/sitemap.xml
