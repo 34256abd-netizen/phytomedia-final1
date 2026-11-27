@@ -1008,13 +1008,13 @@
 
             <div>
               <label class="block text-xs font-bold text-[#1E1B4B] mb-1">المسمى المهني على البطاقة (Position)</label>
-              <input type="text" id="tima-custom-pos" value="مراسلة ومقدمة برامج" oninput="window.phiApp.updateTimaFromSliders()" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+              <input type="text" aria-label="منصب مخصص" id="tima-custom-pos" value="مراسلة ومقدمة برامج" oninput="window.phiApp.updateTimaFromSliders()" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
             </div>
 
             <!-- AI Work Input Box -->
             <div class="space-y-2">
               <label class="block text-xs font-bold text-[#1E1B4B]">اكتب نص عملك الإعلامي أو نبذة مشروعك *</label>
-              <textarea id="tima-work-input" rows="4" placeholder="مثال: تحقيق استقصائي حول سوق الخردة والنفايات الإلكترونية، تم تصويره بكاميرا سوني FX3 ومونتاج دافنشي، وتضمن 4 مقابلات ميدانية..." class="w-full px-3.5 py-3 rounded-2xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
+              <textarea aria-label="نص العمل للتقييم" id="tima-work-input" rows="4" placeholder="مثال: تحقيق استقصائي حول سوق الخردة والنفايات الإلكترونية، تم تصويره بكاميرا سوني FX3 ومونتاج دافنشي، وتضمن 4 مقابلات ميدانية..." class="w-full px-3.5 py-3 rounded-2xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
             </div>
 
             <!-- Evaluate Button -->
@@ -1146,13 +1146,13 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-bold text-[#1E1B4B] mb-1">اختر التحدي المطلوب تسليمه *</label>
-              <select id="lab-submit-challenge-select" onchange="window.phiApp && window.phiApp.onChallengeSelected && window.phiApp.onChallengeSelected(this.value)" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+              <select aria-label="اختيار التحدي" id="lab-submit-challenge-select" onchange="window.phiApp && window.phiApp.onChallengeSelected && window.phiApp.onChallengeSelected(this.value)" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
                 <!-- Populated dynamically via JS -->
               </select>
             </div>
             <div>
               <label class="block text-xs font-bold text-[#1E1B4B] mb-1">عنوان الحل أو العمل *</label>
-              <input type="text" id="lab-submit-title" placeholder="مثال: تحقيق استقصائي: الحرف اليدوية المهددة" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+              <input type="text" aria-label="عنوان العمل المقدم" id="lab-submit-title" placeholder="مثال: تحقيق استقصائي: الحرف اليدوية المهددة" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
             </div>
           </div>
 
@@ -1162,14 +1162,14 @@
               <label id="lab-submit-content-label" class="block text-xs font-bold text-[#1E1B4B]">الصق نص المقال / التحقيق / التقرير كاملا هنا (الحد الأدنى 100 حرف) *</label>
               <span id="lab-submit-char-count" class="text-[11px] font-mono text-slate-400">0 حرف (الحد الأدنى 100)</span>
             </div>
-            <textarea id="lab-submit-content" rows="6" oninput="window.phiApp && window.phiApp.onLabContentInput && window.phiApp.onLabContentInput(this.value)" placeholder="الصق المقال كامل مع العنوان والمصادر..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
+            <textarea aria-label="محتوى المقال" id="lab-submit-content" rows="6" oninput="window.phiApp && window.phiApp.onLabContentInput && window.phiApp.onLabContentInput(this.value)" placeholder="الصق المقال كامل مع العنوان والمصادر..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
             <p id="lab-submit-content-hint" class="text-[11px] text-slate-400 mt-1">⚠️ التدقيق الصحفي الصارم: يُفحص جاذبية العنوان، قوة المقدمة (Hook)، ذكر وتوثيق المصادر، والسلامة اللغوية.</p>
           </div>
 
           <!-- Secondary/Optional Link Field -->
           <div>
             <label id="lab-submit-link-label" class="block text-xs font-bold text-[#1E1B4B] mb-1">أو ارفع المقال كملف - حط رابط Google Docs / PDF / Notion (اختياري)</label>
-            <input type="url" id="lab-submit-link" dir="ltr" placeholder="https://docs.google.com/... أو رابط Notion / Drive PDF / بوست فيسبوك (سيتم قراءته وفحصه عبر urlContext)" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
+            <input type="url" aria-label="رابط العمل المقدم" id="lab-submit-link" dir="ltr" placeholder="https://docs.google.com/... أو رابط Notion / Drive PDF / بوست فيسبوك (سيتم قراءته وفحصه عبر urlContext)" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
             <p id="lab-submit-link-hint" class="text-[10px] text-purple-700 mt-1 font-medium">يدعم الروابط المباشرة لـ Google Docs، مستندات Notion، ملفات PDF على Drive، وبوستات فيسبوك للمطابقة مع النص المكتوب.</p>
           </div>
 
@@ -1797,7 +1797,7 @@
         <!-- Query Input Box & Ask Button -->
         <div class="relative flex flex-col sm:flex-row gap-3">
           <div class="flex-1 relative">
-            <input type="text" id="phi-scout-query-input" placeholder="اكتب سؤال شركتك هنا.. مثلاً: 'محتاجين مونتير شاطر في الأفتر إفكتس وسريع في القاهرة'..." class="w-full px-4 py-3.5 pr-11 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-purple-300/50 text-xs sm:text-sm outline-none focus:border-pink-400 focus:bg-white/15 transition-all">
+            <input type="text" aria-label="سؤال الشركة للمساعد الذكي" id="phi-scout-query-input" placeholder="اكتب سؤال شركتك هنا.. مثلاً: 'محتاجين مونتير شاطر في الأفتر إفكتس وسريع في القاهرة'..." class="w-full px-4 py-3.5 pr-11 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-purple-300/50 text-xs sm:text-sm outline-none focus:border-pink-400 focus:bg-white/15 transition-all">
             <div class="absolute right-3.5 top-1/2 -translate-y-1/2 text-purple-300 pointer-events-none">
               <i data-lucide="search" class="w-4 h-4"></i>
             </div>
@@ -1855,7 +1855,7 @@
         <div class="bg-white p-4 rounded-2xl border border-purple-100 shadow-sm grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
           <div>
             <label class="block font-bold text-[#1E1B4B] mb-1">القسم الأكاديمي</label>
-            <select id="filter-talent-dept" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
+            <select aria-label="فلتر القسم" id="filter-talent-dept" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
               <option value="all">جميع الأقسام</option>
               <option value="صحافة">صحافة ونشر</option>
               <option value="إذاعة وتلفزيون">إذاعة وتلفزيون</option>
@@ -1866,7 +1866,7 @@
 
           <div>
             <label class="block font-bold text-[#1E1B4B] mb-1">شرط المهارة في بطاقة Tima</label>
-            <select id="filter-talent-skill" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
+            <select aria-label="فلتر المهارة" id="filter-talent-skill" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
               <option value="all">أي مهارة</option>
               <option value="montage">مونتاج (Montage)</option>
               <option value="filming">تصوير (Filming)</option>
@@ -1879,7 +1879,7 @@
 
           <div>
             <label class="block font-bold text-[#1E1B4B] mb-1">الحد الأدنى لدرجة المهارة</label>
-            <select id="filter-talent-min-score" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none font-mono">
+            <select aria-label="فلتر الحد الأدنى للتقييم" id="filter-talent-min-score" onchange="window.phiApp.filterTalentPool()" class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none font-mono">
               <option value="0">بدون حد أدنى</option>
               <option value="80">+80 فما فوق</option>
               <option value="85">+85 فما فوق</option>
@@ -1889,7 +1889,7 @@
 
           <div>
             <label class="block font-bold text-[#1E1B4B] mb-1">بحث بالاسم أو التخصص</label>
-            <input type="text" id="filter-talent-search" oninput="window.phiApp.filterTalentPool()" placeholder="بحث..." class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
+            <input type="text" aria-label="بحث في المواهب" id="filter-talent-search" oninput="window.phiApp.filterTalentPool()" placeholder="بحث..." class="w-full p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 outline-none">
           </div>
         </div>
 
@@ -1913,11 +1913,11 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">عنوان الفرصة</label>
-            <input type="text" id="job-create-title" placeholder="مثال: متدرب مونتاج بريمير ودافنشي" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
+            <input type="text" aria-label="عنوان الفرصة" id="job-create-title" placeholder="مثال: متدرب مونتاج بريمير ودافنشي" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
           </div>
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">نوع الفرصة</label>
-            <select id="job-create-type" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
+            <select aria-label="نوع الفرصة" id="job-create-type" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
               <option value="تدريب">تدريب عملي (Internship)</option>
               <option value="فريلانس">مشروع فريلانس (Freelance)</option>
               <option value="دوام">دوام كامل (Full-time)</option>
@@ -1927,7 +1927,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">المهارة المشترطة في بطاقة Tima</label>
-            <select id="job-create-skill" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
+            <select aria-label="المهارة المطلوبة" id="job-create-skill" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
               <option value="montage">مونتاج (Montage)</option>
               <option value="filming">تصوير (Filming)</option>
               <option value="writing">كتابة صحفية (Writing)</option>
@@ -1938,12 +1938,12 @@
           </div>
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">الحد الأدنى لدرجة المهارة (مثال: فوق 80)</label>
-            <input type="number" id="job-create-score" value="80" min="50" max="99" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none font-mono">
+            <input type="number" aria-label="الحد الأدنى للتقييم" id="job-create-score" value="80" min="50" max="99" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none font-mono">
           </div>
         </div>
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">وصف الفرصة والمتطلبات</label>
-          <textarea id="job-create-desc" rows="3" placeholder="اكتب تفاصيل الفرصة والمهام المطلوبة..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none"></textarea>
+          <textarea aria-label="تفاصيل الفرصة" id="job-create-desc" rows="3" placeholder="اكتب تفاصيل الفرصة والمهام المطلوبة..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none"></textarea>
         </div>
         <button onclick="window.phiApp.createCompanyJob()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#EC4899] text-white font-black text-sm shadow-md">
           نشر الفرصة في المنظومة 📢
@@ -2353,12 +2353,12 @@
           <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-2.5">
             <!-- Search -->
             <div class="relative flex-1">
-              <input type="text" id="admin-students-search" oninput="window.phiApp.filterAdminStudents()" placeholder="ابحث بالاسم، الجامعة، أو التخصص..." class="w-full pl-3 pr-9 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+              <input type="text" aria-label="بحث في الطلاب" id="admin-students-search" oninput="window.phiApp.filterAdminStudents()" placeholder="ابحث بالاسم، الجامعة، أو التخصص..." class="w-full pl-3 pr-9 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
               <i data-lucide="search" class="w-4 h-4 text-purple-400 absolute right-3 top-3"></i>
             </div>
 
             <!-- Status Filter -->
-            <select id="admin-students-status-filter" onchange="window.phiApp.filterAdminStudents()" class="px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none font-bold text-slate-700">
+            <select aria-label="فلتر حالة الطلاب" id="admin-students-status-filter" onchange="window.phiApp.filterAdminStudents()" class="px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none font-bold text-slate-700">
               <option value="all">جميع الحالات (الكل)</option>
               <option value="active">مفعل ونشط فقط</option>
               <option value="frozen">مجمد ومعطل فقط</option>
@@ -2571,7 +2571,7 @@
 
           <div class="flex items-center gap-2">
             <label class="text-xs font-bold text-slate-700">تصفية حسب:</label>
-            <select id="admin-reports-filter" onchange="window.phiApp.renderAdminReports()" class="px-3.5 py-2 rounded-xl bg-purple-50 border border-purple-200 text-xs font-bold text-[#1E1B4B] outline-none">
+            <select aria-label="فلتر البلاغات" id="admin-reports-filter" onchange="window.phiApp.renderAdminReports()" class="px-3.5 py-2 rounded-xl bg-purple-50 border border-purple-200 text-xs font-bold text-[#1E1B4B] outline-none">
               <option value="all">جميع البلاغات</option>
               <option value="pending" selected>قيد المراجعة فقط ⏳</option>
               <option value="approved_banned">المحظورة نهائياً 🚫</option>
@@ -2600,8 +2600,8 @@
 
           <!-- Add IP Form -->
           <div class="p-3.5 rounded-2xl bg-rose-50/50 border border-rose-200 flex flex-col md:flex-row items-center gap-2 text-xs">
-            <input type="text" id="admin-new-ip" placeholder="عنوان IP (مثال: 197.34.88.12)" class="w-full md:w-56 px-3.5 py-2 rounded-xl bg-white border border-rose-200 outline-none font-mono">
-            <input type="text" id="admin-new-ip-reason" placeholder="سبب الحظر (مثال: طلب تحويلات وهمية وفودافون كاش)..." class="flex-1 px-3.5 py-2 rounded-xl bg-white border border-rose-200 outline-none">
+            <input type="text" aria-label="عنوان IP للحظر" id="admin-new-ip" placeholder="عنوان IP (مثال: 197.34.88.12)" class="w-full md:w-56 px-3.5 py-2 rounded-xl bg-white border border-rose-200 outline-none font-mono">
+            <input type="text" aria-label="سبب الحظر" id="admin-new-ip-reason" placeholder="سبب الحظر (مثال: طلب تحويلات وهمية وفودافون كاش)..." class="flex-1 px-3.5 py-2 rounded-xl bg-white border border-rose-200 outline-none">
             <button onclick="window.phiApp.addIpToBlacklist()" class="w-full md:w-auto px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold shrink-0 transition-colors cursor-pointer">
               حظر الـ IP 🚫
             </button>
@@ -2678,13 +2678,13 @@
       <form onsubmit="window.phiApp.submitAdminNewChallenge(event)" class="p-6 overflow-y-auto space-y-4">
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">عنوان التحدي *</label>
-          <input type="text" id="admin-modal-ch-title" required placeholder="مثال: تحدي المونتاج الإخباري السريع تحت الضغط" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+          <input type="text" aria-label="عنوان التحدي" id="admin-modal-ch-title" required placeholder="مثال: تحدي المونتاج الإخباري السريع تحت الضغط" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">القسم / التصنيف *</label>
-            <select id="admin-modal-ch-cat" class="w-full px-3 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+            <select aria-label="فئة التحدي" id="admin-modal-ch-cat" class="w-full px-3 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
               <option value="مونتاج">مونتاج وموشن جرافيك</option>
               <option value="صحافة">صحافة وتحقيق استقصائي</option>
               <option value="تصوير">تصوير وإضاءة سينمائية</option>
@@ -2696,13 +2696,13 @@
 
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">نقاط TIMA (XP) المكتسبة *</label>
-            <input type="number" id="admin-modal-ch-points" required min="50" max="2000" step="50" value="350" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
+            <input type="number" aria-label="نقاط التحدي" id="admin-modal-ch-points" required min="50" max="2000" step="50" value="350" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">وصف التحدي والمعايير الصارمة *</label>
-          <textarea id="admin-modal-ch-desc" rows="3" required placeholder="اكتب المطلوب بدقة من الطالب، والمدة الزمنية أو عدد الكلمات، والمعايير التي سيتم التدقيق بناءً عليها..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
+          <textarea aria-label="وصف التحدي" id="admin-modal-ch-desc" rows="3" required placeholder="اكتب المطلوب بدقة من الطالب، والمدة الزمنية أو عدد الكلمات، والمعايير التي سيتم التدقيق بناءً عليها..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
         </div>
 
         <div class="p-3 rounded-2xl bg-purple-50 border border-purple-200 text-xs text-purple-900 flex items-center gap-2">
@@ -2737,28 +2737,28 @@
       <form onsubmit="window.phiApp.submitAdminNewStudent(event)" class="p-6 overflow-y-auto space-y-4">
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">اسم الطالب بالكامل *</label>
-          <input type="text" id="admin-modal-stud-name" required placeholder="مثال: ياسمين طارق خليل" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+          <input type="text" aria-label="اسم الطالب" id="admin-modal-stud-name" required placeholder="مثال: ياسمين طارق خليل" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">البريد الإلكتروني *</label>
-            <input type="email" id="admin-modal-stud-email" required placeholder="yasmin@student.edu.eg" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
+            <input type="email" aria-label="البريد الإلكتروني للطالب" id="admin-modal-stud-email" required placeholder="yasmin@student.edu.eg" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
           </div>
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">المسمى المهني *</label>
-            <input type="text" id="admin-modal-stud-pos" required placeholder="مثال: مونتيرة فيديو وصانعة محتوى" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+            <input type="text" aria-label="منصب الطالب" id="admin-modal-stud-pos" required placeholder="مثال: مونتيرة فيديو وصانعة محتوى" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">الجامعة / الكلية *</label>
-            <input type="text" id="admin-modal-stud-univ" required placeholder="مثال: جامعة القاهرة - إعلام" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+            <input type="text" aria-label="جامعة الطالب" id="admin-modal-stud-univ" required placeholder="مثال: جامعة القاهرة - إعلام" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
           </div>
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">القسم الأكاديمي *</label>
-            <select id="admin-modal-stud-dept" class="w-full px-3 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
+            <select aria-label="قسم الطالب" id="admin-modal-stud-dept" class="w-full px-3 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">
               <option value="إذاعة وتلفزيون">إذاعة وتلفزيون</option>
               <option value="صحافة ونشر">صحافة ونشر</option>
               <option value="علاقات عامة">علاقات عامة وإعلان</option>
@@ -2770,11 +2770,11 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">تقييم TIMA OVR المبدئي *</label>
-            <input type="number" id="admin-modal-stud-ovr" required min="50" max="99" value="91" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
+            <input type="number" aria-label="التقييم العام للطالب" id="admin-modal-stud-ovr" required min="50" max="99" value="91" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
           </div>
           <div>
             <label class="block text-xs font-bold text-[#1E1B4B] mb-1">سنة التخرج *</label>
-            <select id="admin-modal-stud-year" class="w-full px-3 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
+            <select aria-label="السنة الدراسية للطالب" id="admin-modal-stud-year" class="w-full px-3 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
               <option value="2027">2027 (دفعة حالية)</option>
               <option value="2026">2026</option>
               <option value="2025">2025</option>
@@ -2820,7 +2820,7 @@
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">البريد الإلكتروني للإدارة *</label>
           <div class="relative">
-            <input type="email" id="admin-lock-email-input" required placeholder="phytomedia10@gmail.com" dir="ltr" class="w-full px-4 py-2.5 rounded-2xl bg-purple-50/70 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
+            <input type="email" aria-label="البريد الإلكتروني للإدارة" id="admin-lock-email-input" required placeholder="phytomedia10@gmail.com" dir="ltr" class="w-full px-4 py-2.5 rounded-2xl bg-purple-50/70 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono">
             <i data-lucide="mail" class="w-4 h-4 text-purple-400 absolute left-3 top-3"></i>
           </div>
         </div>
@@ -2828,7 +2828,7 @@
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">كلمة المرور الإدارية *</label>
           <div class="relative">
-            <input type="password" id="admin-lock-password-input" required placeholder="••••••••" dir="ltr" class="w-full px-4 py-2.5 rounded-2xl bg-purple-50/70 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono tracking-widest">
+            <input type="password" aria-label="كلمة مرور الإدارة" id="admin-lock-password-input" required placeholder="••••••••" dir="ltr" class="w-full px-4 py-2.5 rounded-2xl bg-purple-50/70 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] font-mono tracking-widest">
             <i data-lucide="key-round" class="w-4 h-4 text-purple-400 absolute left-3 top-3"></i>
           </div>
           <div id="admin-lock-error" class="hidden text-rose-600 text-xs font-bold mt-2"></div>
@@ -2874,7 +2874,7 @@
         <div id="final-section-checkbox-submit" class="final-section-checkbox-submit space-y-4" style="margin-bottom: 120px; position: relative; z-index: 10;">
           <!-- Privacy Checkbox (Mandatory) -->
           <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-purple-50 border border-purple-200">
-            <input type="checkbox" id="role-privacy-check" onchange="window.phiApp.validateRoleSignupForm()" class="mt-1 w-4 h-4 accent-[#7C3AED] cursor-pointer">
+            <input type="checkbox" aria-label="الموافقة على سياسة الخصوصية" id="role-privacy-check" onchange="window.phiApp.validateRoleSignupForm()" class="mt-1 w-4 h-4 accent-[#7C3AED] cursor-pointer">
             <label for="role-privacy-check" class="text-xs text-slate-700 leading-relaxed cursor-pointer font-medium">
               أوافق على الشروط و<a href="#privacy" onclick="window.phiApp.navigateView('privacy'); window.phiApp.closeRoleSignup();" class="text-[#7C3AED] font-bold underline hover:text-[#EC4899]">وثيقة الأمان والخصوصية ومكافحة النصب والاحتيال</a> - <span class="text-[#7C3AED] font-bold">بياناتك وهويتك ملكك</span>
             </label>
@@ -2928,7 +2928,7 @@
         <!-- Choice 1: Day -->
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">اختيار اليوم المفضل</label>
-          <select id="booking-day-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
+          <select aria-label="يوم الحجز" id="booking-day-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none">
             <option value="غداً الثلاثاء">غداً الثلاثاء</option>
             <option value="الأربعاء">الأربعاء القادم</option>
             <option value="الخميس">الخميس القادم</option>
@@ -2939,7 +2939,7 @@
         <!-- Choice 2: Hour -->
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">اختيار الساعة</label>
-          <select id="booking-time-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none font-mono">
+          <select aria-label="وقت الحجز" id="booking-time-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none font-mono">
             <option value="5:00 مساءً">5:00 مساءً - 6:00 مساءً</option>
             <option value="7:00 مساءً" selected>7:00 مساءً - 8:00 مساءً</option>
             <option value="9:00 مساءً">9:00 مساءً - 10:00 مساءً</option>
@@ -2949,7 +2949,7 @@
         <!-- Choice 3: Question -->
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1">سؤالك أو محور السيشن *</label>
-          <textarea id="booking-question-input" rows="2" placeholder="اكتب ما تود مراجعته مع الخبير (سيرتك الذاتية، نقد عمل، نصيحة مهنية)..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">مراجعة الـ Showreel والمونتاج السينمائي لفيلم التخرج القصير.</textarea>
+          <textarea aria-label="سؤال الحجز" id="booking-question-input" rows="2" placeholder="اكتب ما تود مراجعته مع الخبير (سيرتك الذاتية، نقد عمل، نصيحة مهنية)..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED]">مراجعة الـ Showreel والمونتاج السينمائي لفيلم التخرج القصير.</textarea>
         </div>
 
         <!-- Fake Payment Info -->
@@ -3092,7 +3092,7 @@
         <!-- Reason Choice -->
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1.5">سبب البلاغ *</label>
-          <select id="report-reason-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs font-bold outline-none focus:border-rose-500 text-[#1E1B4B]">
+          <select aria-label="سبب البلاغ" id="report-reason-select" class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs font-bold outline-none focus:border-rose-500 text-[#1E1B4B]">
             <option value="حساب وهمي">حساب وهمي (Fake Account / انتحال صفة)</option>
             <option value="يطلب فلوس">يطلب فلوس (طلب تحويلات خارجية أو فودافون كاش)</option>
             <option value="كورس مدفوع">كورس مدفوع (ترويج لكورسات خارجية أو بيع شهادات)</option>
@@ -3104,14 +3104,14 @@
         <!-- Description -->
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1.5">وصف الواقعة وتفاصيل البلاغ *</label>
-          <textarea id="report-description-input" rows="3" placeholder="اشرح ما حدث بدقة (طلب تحويل فلوس، إرسال رابط مشبوه، وعود بكورسات مدفوعة، محادثات خاصة غير لائقة)..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-rose-500"></textarea>
+          <textarea aria-label="وصف البلاغ" id="report-description-input" rows="3" placeholder="اشرح ما حدث بدقة (طلب تحويل فلوس، إرسال رابط مشبوه، وعود بكورسات مدفوعة، محادثات خاصة غير لائقة)..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-rose-500"></textarea>
         </div>
 
         <!-- Screenshot Upload -->
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1.5">رفع سكرين شوت كإثبات (Screenshot Upload)</label>
           <div class="border-2 border-dashed border-rose-200 hover:border-rose-400 rounded-2xl p-4 text-center bg-rose-50/30 transition-colors relative">
-            <input type="file" id="report-screenshot-input" accept="image/*" onchange="window.phiApp.handleReportScreenshotUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+            <input type="file" aria-label="رفع لقطة شاشة" id="report-screenshot-input" accept="image/*" onchange="window.phiApp.handleReportScreenshotUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
             
             <div id="report-screenshot-placeholder" class="flex flex-col items-center justify-center gap-1.5 text-xs text-slate-500 pointer-events-none">
               <i data-lucide="image-plus" class="w-6 h-6 text-rose-500"></i>
@@ -3210,7 +3210,7 @@
         <!-- Feedback comment -->
         <div>
           <label class="block text-xs font-bold text-[#1E1B4B] mb-1.5">ملاحظاتك وانطباعك عن الجلسة *</label>
-          <textarea id="rating-comment-input" rows="3" placeholder="اكتب تجريتك مع المنتور (مثال: الشرح كان ممتاز جداً وركز معايا في نقاط الضعف في البورتفوليو واعطاني نصائح قيمة)..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
+          <textarea aria-label="تعليق التقييم" id="rating-comment-input" rows="3" placeholder="اكتب تجريتك مع المنتور (مثال: الشرح كان ممتاز جداً وركز معايا في نقاط الضعف في البورتفوليو واعطاني نصائح قيمة)..." class="w-full px-3.5 py-2.5 rounded-xl bg-purple-50/50 border border-purple-200 text-xs outline-none focus:border-[#7C3AED] leading-relaxed"></textarea>
         </div>
 
         <!-- Submit Button -->
