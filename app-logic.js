@@ -3114,7 +3114,7 @@ function renderMentorApp() {
   const u = state.currentUser || {
     name: 'أحمد كمال الدين',
     specialty: 'مونتاج بريمير ودافنشي',
-    experience: 'مونتير في الجزيرة',
+    experience: 'مونتير محترف',
     earnings: 13600,
     price: 200
   };
