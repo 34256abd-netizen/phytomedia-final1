@@ -385,3 +385,9 @@ body {
   }
 }
 
+/* Accessibility: visible keyboard focus for buttons and links */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #EC4899;
+  outline-offset: 2px;
+}
