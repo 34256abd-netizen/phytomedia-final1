@@ -388,6 +388,19 @@ const VIEW_TITLES = {
   'privacy': 'سياسة الخصوصية | φ To Media'
 };
 const STUDENT_TAB_TITLES = { 'builder': 'بنائي', 'tima': 'بطاقات Tima', 'lab': 'المعمل', 'mentors': 'المنتورز', 'about': 'حول φ' };
+const VIEW_DESCRIPTIONS = {
+  'landing': 'منظومة φ To Media المتكاملة لطلاب وخريجي كليات الإعلام، الخبراء والمنتورز، والمؤسسات الإعلامية في مصر. بطاقات Tima، بورتفوليو احترافي، ومعمل التحديات.',
+  'role-select': 'انضم إلى منظومة φ To Media واختر هويتك الإعلامية: طالب، منتور، أو مؤسسة إعلامية.',
+  'student-app': 'بوابة الطلاب في φ To Media: صانع السيرة الذاتية الذكي، بطاقات Tima، معمل التحديات، وحجز جلسات مع المنتورز.',
+  'mentor-app': 'بوابة المنتورز في φ To Media: إدارة الجلسات والحجوزات والأرباح لخبراء الإعلام.',
+  'company-app': 'بوابة المؤسسات في φ To Media: اكتشف كوادر إعلامية موثوقة وانشر فرص التدريب والتوظيف.',
+  'admin-app': 'لوحة تحكم منظومة φ To Media.',
+  'privacy': 'سياسة الخصوصية والأمان في منظومة φ To Media: بياناتك وهويتك ملكك.'
+};
+function updatePageMeta(viewName) {
+  const d = document.querySelector('meta[name="description"]');
+  if (d) d.setAttribute('content', VIEW_DESCRIPTIONS[viewName] || VIEW_DESCRIPTIONS['landing']);
+}
 export function navigateView(viewName) {
   if (viewName === 'admin-app' && !isAdminAuthenticated()) {
     openAdminLockModal();
@@ -395,6 +408,7 @@ export function navigateView(viewName) {
   }
   state.currentView = viewName;
   document.title = VIEW_TITLES[viewName] || VIEW_TITLES['landing'];
+  updatePageMeta(viewName);
   if (viewName !== 'admin-app' && window.location.hash === '#admin') {
     window.location.hash = '';
   }
