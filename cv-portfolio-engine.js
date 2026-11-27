@@ -877,12 +877,12 @@ export function renderCVStepForm() {
         <div class="p-4 rounded-2xl bg-purple-50/50 border border-purple-100 flex flex-col sm:flex-row items-center gap-4">
           <div class="relative w-20 h-20 rounded-2xl overflow-hidden bg-white border-2 border-purple-200 flex items-center justify-center shrink-0 shadow-sm">
             ${d.photo 
-              ? `<img id="cv-photo-preview" src="${d.photo}" class="w-full h-full object-cover">`
+              ? `<img id="cv-photo-preview" src="${d.photo}" alt="" class="w-full h-full object-cover">`
               : `<div id="cv-photo-placeholder" class="text-center p-2 text-purple-400">
                   <i data-lucide="camera" class="w-6 h-6 mx-auto mb-1"></i>
                   <span class="text-[9px] block font-bold">صورة</span>
                  </div>
-                 <img id="cv-photo-preview" src="" class="w-full h-full object-cover hidden">`
+                 <img id="cv-photo-preview" src="" alt="" class="w-full h-full object-cover hidden">`
             }
           </div>
           <div class="flex-1 text-center sm:text-right space-y-1.5">
@@ -1392,7 +1392,7 @@ export function renderCVPreview() {
         <div class="relative z-10 flex flex-row items-center gap-4 sm:gap-6 text-right">
           ${d.photo ? `
             <div class="w-20 h-20 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-pink-400 shrink-0 shadow-lg bg-purple-950">
-              <img src="${d.photo}" class="w-full h-full object-cover">
+              <img src="${d.photo}" alt="" class="w-full h-full object-cover">
             </div>
           ` : `
             <div class="w-20 h-20 sm:w-28 sm:h-28 rounded-2xl border-2 border-purple-400/40 shrink-0 flex items-center justify-center bg-purple-900/40 text-pink-300 font-black text-2xl font-mono">
@@ -1625,7 +1625,7 @@ export function buildA4DocumentHtml(d, edu, exps, mediaSkills, techSkills, langs
         <div style="display: flex; align-items: center; gap: 20px;">
           ${d.photo ? `
             <div style="width: 88px; height: 88px; border-radius: 16px; overflow: hidden; border: 2.5px solid #EC4899; flex-shrink: 0; background: #2E1065;">
-              <img src="${d.photo}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <img src="${d.photo}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
             </div>
           ` : `
             <div style="width: 88px; height: 88px; border-radius: 16px; border: 2.5px solid rgba(236,72,153,0.5); flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #2E1065; color: #F472B6; font-size: 32px; font-weight: 900;">
