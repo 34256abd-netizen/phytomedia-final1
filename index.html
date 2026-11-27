@@ -12,10 +12,12 @@
   <meta property="og:title" content="φ To Media | الإعلام مش هواية. الإعلام هوية">
   <meta property="og:description" content="منظومة لطلاب وخريجي كليات الإعلام والمنتورز والمؤسسات: بطاقات Tima وCV وجلسات 1-on-1.">
   <meta property="og:url" content="https://phytomedia-final2.phytomedia10.workers.dev/">
-  <meta property="og:image" content="https://phytomedia-final2.phytomedia10.workers.dev/og-image.svg">
+  <meta property="og:image" content="https://phytomedia-final2.phytomedia10.workers.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ar_EG">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://phytomedia-final2.phytomedia10.workers.dev/og-image.svg">
+  <meta name="twitter:image" content="https://phytomedia-final2.phytomedia10.workers.dev/og-image.png">
 
   <!-- Favicon / App Icon with φ Symbol -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%237C3AED'/><stop offset='100%25' stop-color='%23EC4899'/></linearGradient></defs><text x='50%25' y='68%25' dominant-baseline='middle' text-anchor='middle' font-family='Cairo, sans-serif' font-weight='900' font-size='68' fill='white'>φ</text></svg>">
@@ -35,6 +37,9 @@
   <!-- Google Fonts: Cairo, Amiri, Tajawal, Inter, Aref Ruqaa, Space Grotesk & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
@@ -179,7 +184,7 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@1.82.0"></script>
+  <script defer src="https://unpkg.com/lucide@1.82.0"></script>
 
   <!-- Early Safe window.phiApp proxy to guarantee phiApp is NEVER undefined at any click time -->
   <script>
@@ -375,11 +380,11 @@
         <button onclick="window.phiApp.navigateView('company-app')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all flex items-center gap-1.5">
           <span>🏢 بوابة المؤسسات</span>
         </button>
-        <button onclick="window.phiApp.navigateView('privacy')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all flex items-center gap-1.5">
+        <button onclick="window.phiApp.navigateView('privacy')" class="hidden xl:flex px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all items-center gap-1.5">
           <i data-lucide="shield-check" class="w-3.5 h-3.5 text-pink-400"></i>
           <span>الأمان والخصوصية</span>
         </button>
-        <button onclick="window.phiApp.navigateView('student-app'); window.phiApp.setStudentTab('about')" class="px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all flex items-center gap-1.5">
+        <button onclick="window.phiApp.navigateView('student-app'); window.phiApp.setStudentTab('about')" class="hidden xl:flex px-3.5 py-1.5 rounded-xl font-bold text-purple-200 hover:text-white transition-all items-center gap-1.5">
           <i data-lucide="help-circle" class="w-3.5 h-3.5 text-purple-300"></i>
           <span>حول φ To Media</span>
         </button>
