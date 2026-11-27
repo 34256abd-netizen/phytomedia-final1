@@ -366,6 +366,17 @@ export function saveToStorage() {
   saveToStorageEngine(state);
 }
 
+// Accessibility: Escape closes any open modal
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  document.querySelectorAll('[id^="modal-"]').forEach((m) => {
+    if (!m.classList.contains('hidden')) {
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+  });
+});
+
 // Navigation
 const VIEW_TITLES = {
   'landing': 'φ To Media | الإعلام مش هواية. الإعلام هوية',
