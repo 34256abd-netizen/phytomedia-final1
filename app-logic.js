@@ -194,7 +194,7 @@ export function initApp() {
   } else if (hash === '#privacy' || path === '/privacy') {
     state.currentView = 'privacy';
   } else if (state.currentUser) {
-    if (state.currentUser.role === 'admin' || (state.currentUser.email && state.currentUser.email.trim().toLowerCase() === 'phytomedia10@gmail.com')) {
+    if (state.currentUser.role === 'admin' && isAdminAuthenticated()) {
       state.currentView = 'admin-app';
     } else if (state.currentUser.role === 'mentor') state.currentView = 'mentor-app';
     else if (state.currentUser.role === 'company') state.currentView = 'company-app';
@@ -911,21 +911,9 @@ export function submitRoleSignup() {
   const enteredEmail = (document.getElementById('reg-email')?.value || '').trim().toLowerCase();
   const enteredPass = (document.getElementById('reg-password')?.value || '').trim();
 
-  // Super Admin login bypass
-  if (enteredEmail === 'phytomedia10@gmail.com' && enteredPass === 'phy-k13204') {
-    state.currentUser = {
-      id: 'admin-super',
-      role: 'admin',
-      name: 'المدير العام φ To Media',
-      email: 'phytomedia10@gmail.com',
-      status: 'active',
-      joinedAt: new Date().toLocaleDateString('ar-EG')
-    };
-    sessionStorage.setItem('phi_admin_authenticated', 'true');
-    saveToStorage();
-    closeRoleSignup();
-    navigateView('admin-app');
-    alert('✓ مرحباً بك يا مدير المنظومة! تم تسجيل دخولك بنجاح وتفعيل لوحة التحكم.');
+  // The admin email is reserved: admin access is granted only by the server (see submitAdminLock).
+  if (enteredEmail === 'phytomedia10@gmail.com') {
+    alert('هذا البريد محجوز ولا يمكن التسجيل به.');
     return;
   }
 
@@ -2517,12 +2505,11 @@ ${link ? '• تم فحص الرابط المرفق وقراءته عبر urlCon
 }
 
 // -------------------------------------------------------------
-// ADMIN ACTIONS & SECURE ACCESS GATE (pass: phi2026)
+// ADMIN ACTIONS & SECURE ACCESS GATE (server-verified)
 // -------------------------------------------------------------
 export function isAdminAuthenticated() {
-  const isAuth = sessionStorage.getItem('phi_admin_authenticated') === 'true' || localStorage.getItem('phi_admin_authenticated') === 'true';
-  const isEmail = state.currentUser && state.currentUser.email && state.currentUser.email.trim().toLowerCase() === 'phytomedia10@gmail.com';
-  return isAuth || isEmail;
+  // Only a token issued by the server after a successful admin login counts.
+  try { return !!sessionStorage.getItem('phi_admin_token'); } catch (e) { return false; }
 }
 
 export function checkAdminAccess() {
@@ -2568,7 +2555,7 @@ export function closeAdminLockModal() {
   }
 }
 
-export function submitAdminLock(e) {
+export async function submitAdminLock(e) {
   if (e && e.preventDefault) e.preventDefault();
   const emailInput = document.getElementById('admin-lock-email-input');
   const passInput = document.getElementById('admin-lock-password-input');
@@ -2577,27 +2564,39 @@ export function submitAdminLock(e) {
   const email = (emailInput?.value || '').trim().toLowerCase();
   const pass = (passInput?.value || '').trim();
 
-  if ((email === 'phytomedia10@gmail.com' || !email) && (pass === 'phy-k13204' || pass === 'phi2026')) {
+  let token = null;
+  try {
+    const res = await fetch('/api/admin-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pass })
+    });
+    if (res.ok && (res.headers.get('content-type') || '').includes('application/json')) {
+      const data = await res.json();
+      if (data && data.ok && typeof data.token === 'string') token = data.token;
+    }
+  } catch (err) { token = null; }
+
+  if (token) {
     state.currentUser = {
       id: 'admin-super',
       role: 'admin',
       name: 'المدير العام φ To Media',
-      email: 'phytomedia10@gmail.com',
+      email,
       status: 'active',
       joinedAt: new Date().toLocaleDateString('ar-EG')
     };
-    sessionStorage.setItem('phi_admin_authenticated', 'true');
-    localStorage.setItem('phi_admin_authenticated', 'true');
+    sessionStorage.setItem('phi_admin_token', token);
     saveToStorage();
     closeAdminLockModal();
     state.currentView = 'admin-app';
     window.location.hash = '#admin';
     renderApp();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    alert('✓ مرحباً بك يا مدير المنظومة! تم تسجيل الدخول بنجاح وإظهار لوحة التحكم.');
+    alert('✓ تم تسجيل دخول المدير بنجاح.');
   } else {
     if (errorEl) {
-      errorEl.innerText = '⛔ البريد الإلكتروني أو كلمة المرور غير صحيحة! لا يمكن الدخول إلا بالحساب المصرح له رسمياً.';
+      errorEl.innerText = 'تعذر تسجيل الدخول. تأكد من البيانات أو أن خدمة الإدارة مفعّلة.';
       errorEl.classList.remove('hidden');
     }
     if (passInput) {
@@ -2609,6 +2608,7 @@ export function submitAdminLock(e) {
 
 export function logoutAdmin() {
   state.currentUser = null;
+  sessionStorage.removeItem('phi_admin_token');
   sessionStorage.removeItem('phi_admin_authenticated');
   localStorage.removeItem('phi_admin_authenticated');
   localStorage.removeItem(STORAGE_KEY_USER);
@@ -3871,7 +3871,7 @@ export function submitReport() {
 }
 
 // -------------------------------------------------------------
-// RENDER: ADMIN DASHBOARD (phi2026 / #admin)
+// RENDER: ADMIN DASHBOARD (#admin)
 // -------------------------------------------------------------
 export let adminPortfolioFilter = 'all';
 
@@ -3879,7 +3879,7 @@ export function copyAdminDashboardLink() {
   const url = window.location.origin + window.location.pathname + '#admin';
   try {
     navigator.clipboard.writeText(url).then(() => {
-      alert(`✓ تم نسخ رابط لوحة التحكم المركزية بنجاح!\n\n${url}\n\nكلمة المرور: phi2026\nيمكنك مشاركته أو تجربته في تبويب جديد.`);
+      alert(`✓ تم نسخ رابط لوحة التحكم المركزية بنجاح!\n\n${url}\n\nيمكنك مشاركته أو تجربته في تبويب جديد.`);
     }).catch(() => {
       prompt('رابط لوحة التحكم المباشر:', url);
     });
